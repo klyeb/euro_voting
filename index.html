@@ -12,151 +12,234 @@
         /* Base Styles */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #1A202C;
-            color: #E2E8F0;
+            background-color: #1A202C; /* Dark blue-gray */
+            color: #E2E8F0; /* Light gray-blue text */
             overscroll-behavior-y: contain;
+            line-height: 1.6;
         }
 
         /* Theme Colors */
-        .theme-primary { color: #FBBF24; }
-        .theme-secondary { color: #60A5FA; }
-        .bg-theme-surface { background-color: #2D3748; }
-        .border-theme-highlight { border-color: #FBBF24; }
+        .theme-primary { color: #FBBF24; } /* Amber */
+        .theme-secondary { color: #60A5FA; } /* Blue */
+        .bg-theme-surface { background-color: #2D3748; } /* Darker surface */
+        .border-theme-highlight { border-color: #FBBF24; } /* Amber border */
 
         /* Header Enhancements */
         header {
-            background-color: #1F2937;
-            padding: 1rem 1rem 1.5rem;
-            border-bottom: 3px solid #FBBF24;
+            background-color: #1F2937; 
+            padding: 1.5rem 1rem 2rem; 
+            border-bottom: 4px solid #FBBF24; 
             text-align: center;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0, 0.2);
         }
         header::before {
             content: "";
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 100 100'%3E%3Cpath d='M50 87.5L46.5 84.4C21.6 62.4 10 52.8 10 38C10 27.2 18.2 19 28.5 19C35.6 19 42.8 23.4 46.5 29.5C48.3153 26.3165 50.5049 23.4017 53.0031 20.8616C55.5012 18.3215 58.2783 16.1989 61.2428 14.5737C64.2073 12.9485 67.3264 11.8421 70.5 11.29C71.5 11.29 71.5 11.29 71.5 11.29C81.8 11.29 90 19.49 90 29.29C90 44.09 78.4 53.69 53.5 75.69L50 78.79Z' fill='%23FBBF24' fill-opacity='0.05'/%3E%3C/svg%3E");
-            background-size: 40px 40px;
-            opacity: 0.5;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 100 100'%3E%3Cpath d='M50 87.5L46.5 84.4C21.6 62.4 10 52.8 10 38C10 27.2 18.2 19 28.5 19C35.6 19 42.8 23.4 46.5 29.5C48.3153 26.3165 50.5049 23.4017 53.0031 20.8616C55.5012 18.3215 58.2783 16.1989 61.2428 14.5737C64.2073 12.9485 67.3264 11.8421 70.5 11.29C71.5 11.29 71.5 11.29 71.5 11.29C81.8 11.29 90 19.49 90 29.29C90 44.09 78.4 53.69 53.5 75.69L50 78.79Z' fill='%23FBBF24' fill-opacity='0.03'/%3E%3C/svg%3E");
+            background-size: 50px 50px; 
+            opacity: 0.6;
             z-index: 0;
         }
         header > * { position: relative; z-index: 1; }
-        .eurovision-logo-container { display: flex; align-items: center; justify-content: center; margin-bottom: 0.25rem; }
-        .eurovision-logo-container svg { width: 2.5rem; height: 2.5rem; margin-right: 0.75rem; color: #EF4444; }
-        header h1 { color: #FBBF24; font-size: 2rem; font-weight: 700; }
-        header .subtitle { color: #9CA3AF; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 0.1rem; }
-        header .app-subtitle { color: #60A5FA; font-size: 1.1rem; font-weight: 500; margin-top: 0.25rem; }
+        .eurovision-logo-container { display: flex; align-items: center; justify-content: center; margin-bottom: 0.5rem; }
+        .eurovision-logo-container svg { width: 3rem; height: 3rem; margin-right: 0.75rem; color: #EF4444; }
+        header h1 { color: #FBBF24; font-size: 2.25rem; sm:font-size: 2.5rem; font-weight: 700; }
+        header .subtitle { color: #9CA3AF; font-size: 1rem; sm:font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.075em; margin-top: 0.25rem; }
+        header .app-subtitle { color: #60A5FA; font-size: 1.2rem; sm:font-size: 1.3rem; font-weight: 500; margin-top: 0.35rem; }
 
         /* Tab Buttons */
-        .tab-button { padding: 0.6rem 1.2rem; border-radius: 0.5rem; cursor: pointer; transition: background-color 0.3s, color 0.3s, box-shadow 0.3s; font-weight: 600; border: 1px solid transparent; font-size: 0.9rem; }
-        .tab-button.active { background-color: #FBBF24; color: #1A202C; box-shadow: 0 2px 4px rgba(251, 191, 36, 0.3); }
+        .tab-button-container { display: flex; justify-content: center; gap: 0.5rem; sm:gap: 0.75rem; margin-bottom: 1.5rem; }
+        .tab-button {
+            padding: 0.75rem 1.25rem; 
+            border-radius: 0.5rem; 
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s, box-shadow 0.3s, transform 0.2s;
+            font-weight: 600;
+            border: 1px solid transparent;
+            font-size: 0.9rem; sm:font-size: 1rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .tab-button.active {
+            background-color: #FBBF24; color: #1A202C;
+            box-shadow: 0 3px 6px rgba(251, 191, 36, 0.4);
+            transform: translateY(-2px);
+        }
         .tab-button:not(.active) { background-color: #4A5568; color: #E2E8F0; }
-        .tab-button:not(.active):hover { background-color: #718096; }
+        .tab-button:not(.active):hover { background-color: #718096; box-shadow: 0 2px 4px rgba(0,0,0,0.15); }
 
         /* Cards (Voting Items) */
-        .card { background-color: var(--bg-theme-surface); border: 1px solid #4A5568; border-radius: 0.75rem; padding: 1.25rem; margin-bottom: 1rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        .card h3 { color: #FBBF24; font-size: 1.125rem; margin-bottom: 0.25rem; }
-        .card p, .card label { color: #CBD5E0; font-size: 0.875rem; }
+        .card {
+            background-color: var(--bg-theme-surface);
+            border: 1px solid #4A5568; 
+            border-radius: 0.75rem; 
+            padding: 1.25rem;
+            margin-bottom: 1.25rem; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .card h3 { color: #FBBF24; font-size: 1.2rem; margin-bottom: 0.35rem; }
+        .card p, .card label { color: #CBD5E0; font-size: 0.9rem; }
+        .card .text-xs { font-size: 0.8rem; } 
 
-        /* Custom Range Slider Styling */
+        /* Custom Range Slider Styling (Main form) */
         .slider-container { position: relative; margin-top: 0.5rem; margin-bottom: 1.5rem; }
-        input[type="range"] { -webkit-appearance: none; appearance: none; width: 100%; height: 10px; background: #4A5568; outline: none; border-radius: 5px; cursor: pointer; margin: 0; }
-        input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 22px; height: 22px; background: #FBBF24; cursor: grab; border-radius: 50%; border: 3px solid #2D3748; box-shadow: 0 0 5px rgba(251, 191, 36, 0.5); margin-top: -6px; }
-        input[type="range"]::-moz-range-thumb { width: 22px; height: 22px; background: #FBBF24; cursor: grab; border-radius: 50%; border: 3px solid #2D3748; box-shadow: 0 0 5px rgba(251, 191, 36, 0.5); }
-        input[type="range"]:active::-webkit-slider-thumb { cursor: grabbing; }
-        input[type="range"]:active::-moz-range-thumb { cursor: grabbing; }
-        .slider-ticks { display: flex; justify-content: space-between; padding: 0 5px; margin-top: 0.5rem; }
-        .slider-ticks span { font-size: 0.75rem; color: #9CA3AF; position: relative; }
-        .slider-ticks span::before { content: ''; position: absolute; left: 50%; transform: translateX(-50%); top: -8px; width: 1px; height: 4px; background-color: #718096; }
+        input[type="range"] { -webkit-appearance: none; appearance: none; width: 100%; height: 12px; background: #4A5568; outline: none; border-radius: 6px; cursor: pointer; margin: 0; transition: background 0.3s; }
+        input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 24px; height: 24px; background: #FBBF24; cursor: grab; border-radius: 50%; border: 4px solid #2D3748; box-shadow: 0 0 8px rgba(251, 191, 36, 0.6); margin-top: -6px; transition: transform 0.2s; }
+        input[type="range"]::-moz-range-thumb { width: 24px; height: 24px; background: #FBBF24; cursor: grab; border-radius: 50%; border: 4px solid #2D3748; box-shadow: 0 0 8px rgba(251, 191, 36, 0.6); }
+        input[type="range"]:active::-webkit-slider-thumb { cursor: grabbing; transform: scale(1.1); }
+        input[type="range"]:active::-moz-range-thumb { cursor: grabbing; transform: scale(1.1); }
+        .slider-ticks { display: flex; justify-content: space-between; padding: 0 5px; margin-top: 0.6rem; }
+        .slider-ticks span { font-size: 0.8rem; color: #9CA3AF; position: relative; }
+        .slider-ticks span::before { content: ''; position: absolute; left: 50%; transform: translateX(-50%); top: -10px; width: 1.5px; height: 5px; background-color: #718096; }
 
-        .score-output { color: #FBBF24; font-weight: bold; font-size: 1rem; min-width: 20px; display: inline-block; text-align: right; }
-        .total-entry-score { color: #FFFFFF; background-color: #60A5FA; padding: 0.3rem 0.6rem; border-radius: 0.25rem; font-size: 0.9rem; }
+        /* Modal specific input styles for compactness */
+        .modal-body .modal-score-editor { margin-top: 1.5rem; border-top: 1px solid #4A5568; padding-top: 1rem;}
+        .modal-body .modal-score-item-editor { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; }
+        .modal-body .modal-score-item-editor label { font-size: 0.9rem; color: #CBD5E0; flex-basis: 60%;}
+        .modal-body .modal-score-item-editor input[type="number"] {
+            width: 60px; /* Fixed width for number input */
+            padding: 0.3rem 0.5rem;
+            background-color: #1F2937;
+            border: 1px solid #4A5568;
+            color: #E2E8F0;
+            border-radius: 0.375rem;
+            text-align: center;
+            font-size: 0.9rem;
+            -moz-appearance: textfield; /* Firefox */
+        }
+        .modal-body .modal-score-item-editor input[type="number"]::-webkit-outer-spin-button,
+        .modal-body .modal-score-item-editor input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+
+        .score-output { color: #FBBF24; font-weight: bold; font-size: 1.05rem; min-width: 22px; display: inline-block; text-align: right; }
+        .total-entry-score { color: #FFFFFF; background-color: #60A5FA; padding: 0.35rem 0.7rem; border-radius: 0.3rem; font-size: 0.95rem; }
         
         /* Leaderboard Table Styles */
-        .leaderboard-table-container { overflow-x: auto; background-color: var(--bg-theme-surface); border: 1px solid #4A5568; border-radius: 0.75rem; box-shadow: 0 4px 8px rgba(0,0,0,0.15); }
+        .leaderboard-table-container { overflow-x: auto; background-color: var(--bg-theme-surface); border: 1px solid #4A5568; border-radius: 0.75rem; box-shadow: 0 6px 12px rgba(0,0,0,0.2); }
         .leaderboard-table { width: 100%; border-collapse: collapse; }
-        .leaderboard-table th, .leaderboard-table td { padding: 0.75rem; text-align: left; vertical-align: middle; border-bottom: 1px solid #4A5568; white-space: nowrap; }
-        /* Ensuring all th elements have identical font properties, color, and background */
+        .leaderboard-table th, .leaderboard-table td { padding: 0.85rem 1rem; text-align: left; vertical-align: middle; border-bottom: 1px solid #4A5568; white-space: nowrap; }
         .leaderboard-table th {
-            font-family: 'Inter', sans-serif; /* Explicitly set font family */
-            color: #FBBF24; /* Gold color */
-            background-color: #252E3D; /* Consistent dark header background */
-            font-weight: 600; /* Bold */
-            font-size: 0.8rem; /* Consistent size */
-            text-transform: uppercase;
-            letter-spacing: 0.05em; /* Adjusted letter spacing */
-            position: sticky; top: 0; z-index: 10;
-            border-right: 1px solid #4A5568;
+            font-family: 'Inter', sans-serif; color: #FBBF24; background-color: #252E3D; font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; position: sticky; top: 0; z-index: 10; border-right: 1px solid #4A5568;
         }
         .leaderboard-table th:last-child { border-right: none; }
-        .leaderboard-table td { color: #E2E8F0; font-size: 0.875rem; border-right: 1px solid #4A5568; }
+        .leaderboard-table td { color: #E2E8F0; font-size: 0.9rem; border-right: 1px solid #4A5568; }
         .leaderboard-table td:last-child { border-right: none; }
         .leaderboard-table tr:nth-child(even) td { background-color: #354154; }
         .leaderboard-table tr:last-child td { border-bottom: none; }
-        .leaderboard-table tr:hover td { background-color: #4A5568; }
-        .leaderboard-table .rank-col { text-align: center; font-weight: bold; width: 10%; color: #FBBF24; }
-        .leaderboard-table .country-col { width: 35%; font-weight: 500; }
-        .leaderboard-table .artist-col { width: 35%; font-size: 0.8em; color: #A0AEC0; }
-        .leaderboard-table .score-col { text-align: center; font-weight: bold; font-size: 1em; width: 10%; color: #FBBF24; }
-        .leaderboard-table .details-col { text-align: center; width: 10%; }
-        .leaderboard-table .details-button { font-size: 0.8em; padding: 0.25rem 0.5rem; min-width: 60px; text-align: center; }
+        .leaderboard-table tr:hover td { background-color: #4A5568; transition: background-color 0.2s; }
+        .leaderboard-table .rank-col { text-align: center; font-weight: bold; width: 8%; color: #FBBF24; }
+        .leaderboard-table .country-col { width: 30%; font-weight: 500; }
+        .leaderboard-table .artist-song-col { width: 35%; font-size: 0.8em; color: #A0AEC0; }
+        .leaderboard-table .score-col { text-align: center; font-weight: bold; font-size: 1em; width: 8%; color: #FBBF24; }
+        .leaderboard-table .details-col { text-align: center; width: 19%; }
+        .leaderboard-table .details-button { font-size: 0.8em; padding: 0.3rem 0.6rem; min-width: 65px; text-align: center; }
 
         /* Modal Styling */
-        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.85); display: flex; align-items: center; justify-content: center; z-index: 1000; overflow-y: auto; padding: 1rem; }
+        .modal {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.88); 
+            display: flex; align-items: center; justify-content: center;
+            z-index: 1000; overflow-y: auto; padding: 1rem;
+            opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .modal.show { opacity: 1; visibility: visible; }
         .modal-content {
-            background-color: #2D3748; /* Surface color */
-            padding: 1.5rem; /* Default padding */
-            border-radius: 0.75rem;
-            border: 2px solid #FBBF24; /* Gold border for emphasis */
-            width: 95%; max-width: 450px; /* Slightly narrower for a sleeker look */
+            background-color: #2D3748; 
+            padding: 0; 
+            border-radius: 0.875rem; 
+            border: 1px solid #4A5568;
+            width: 95%; max-width: 480px; 
             color: #E2E8F0;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-            text-align: center; /* Center align content in modal */
+            box-shadow: 0 12px 35px rgba(0,0,0,0.5); 
+            text-align: left; 
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+            max-height: 90vh; 
+            display: flex;
+            flex-direction: column;
         }
-        .modal-content h3 { /* Country Name */
-            color: #FBBF24; 
-            font-size: 1.75rem; /* Larger country name */
+        .modal.show .modal-content { transform: scale(1); }
+
+        .modal-header {
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid #4A5568;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-shrink: 0;
+        }
+        .modal-header-content {}
+        .modal-country-flag { font-size: 2.5rem; margin-right: 0.75rem; line-height: 1; }
+        .modal-country-name {
+            color: #FBBF24;
+            font-size: 1.6rem; sm:font-size: 1.85rem;
             font-weight: 700;
-            margin-bottom: 1rem;
             line-height: 1.2;
+            display: inline;
         }
-        .modal-score-details-grid { /* For category scores */
-            display: grid;
-            grid-template-columns: repeat(2, 1fr); /* Two columns for scores */
-            gap: 0.75rem; /* Space between score items */
-            margin-bottom: 1.5rem; /* Space before chart */
-            text-align: left;
+        .modal-song-artist { margin-top: 0.5rem; }
+        .modal-song-title { font-size: 1.1rem; font-weight: 500; color: #CBD5E0; }
+        .modal-artist-name { font-size: 0.95rem; color: #9CA3AF; }
+        .modal-close-btn {
+            background: none; border: none; color: #9CA3AF; font-size: 2.25rem;
+            line-height: 1; padding: 0.25rem; cursor: pointer; transition: color 0.2s;
         }
-        .modal-score-item {
-            background-color: #374151; /* Slightly lighter than modal bg */
-            padding: 0.5rem 0.75rem;
-            border-radius: 0.375rem;
-            font-size: 0.9rem;
+        .modal-close-btn:hover { color: #FBBF24; }
+
+        .modal-body { 
+            padding: 1.25rem 1.5rem; 
+            overflow-y: auto; 
+            flex-grow: 1;
         }
-        .modal-score-item span:first-child { color: #CBD5E0; } /* Category name */
-        .modal-score-item span:last-child { color: #FBBF24; font-weight: 600; } /* Score value */
+        
+        /* Chart Container in Modal (now at the top of modal-body) */
+        .modal-body .chart-container {
+             height: 180px; width: 180px; 
+             padding: 0.2rem;
+             background-color: transparent; box-shadow: none; margin: 0 auto 1.5rem auto; /* Centered, with margin below */
+        }
+
+
+        .modal-footer {
+            padding: 0.75rem 1.5rem; 
+            border-top: 1px solid #4A5568;
+            text-align: right;
+            flex-shrink: 0;
+        }
+        .modal-footer .btn {
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+        }
 
 
         /* Buttons */
-        .btn { background-color: #FBBF24; color: #1A202C; padding: 0.6rem 1.2rem; border-radius: 0.375rem; font-weight: 600; cursor: pointer; transition: background-color 0.2s, transform 0.2s; border: none; font-size: 0.9rem; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        .btn:hover { background-color: #F59E0B; transform: translateY(-1px); }
-        .btn-secondary { background-color: #4A5568; color: #E2E8F0; }
-        .btn-secondary:hover { background-color: #718096; }
-        .btn-danger { background-color: #E53E3E; color: #FFFFFF; }
-        .btn-danger:hover { background-color: #C53030; }
-        
-        /* Chart Container */
-        .chart-container { position: relative; margin: auto; height: 280px; width: 100%; background-color: #252E3D; padding: 1rem; border-radius: 0.5rem; box-shadow: inset 0 2px 4px rgba(0,0,0,0.2); }
-        /* Modal Chart Container - specific styling */
-        .modal .chart-container {
-             height: 200px; /* Adjusted for modal */
-             width: 200px; /* Make it square for doughnut */
-             padding: 0.5rem;
-             background-color: transparent; /* Transparent, modal content has bg */
-             box-shadow: none; /* Remove inner shadow for modal chart */
-             margin-bottom: 1.5rem; /* Space below chart */
+        .btn {
+            background-color: #FBBF24; color: #1A202C; padding: 0.7rem 1.4rem;
+            border-radius: 0.5rem; font-weight: 600; cursor: pointer;
+            transition: background-color 0.2s, transform 0.2s, box-shadow 0.2s;
+            border: none; font-size: 0.95rem; box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+            display: inline-flex; align-items: center; justify-content: center;
         }
+        .btn:hover { background-color: #F59E0B; transform: translateY(-2px); box-shadow: 0 4px 8px rgba(245, 158, 11, 0.3); }
+        .btn-secondary { background-color: #4A5568; color: #E2E8F0; }
+        .btn-secondary:hover { background-color: #718096; box-shadow: 0 4px 8px rgba(113, 128, 150, 0.2); }
+        .btn-danger { background-color: #E53E3E; color: #FFFFFF; }
+        .btn-danger:hover { background-color: #C53030; box-shadow: 0 4px 8px rgba(229, 62, 62, 0.3); }
+        .btn-subtle { background-color: #3E4C5F; color: #A0AEC0; font-size: 0.85rem; padding: 0.5rem 1rem;}
+        .btn-subtle.active { background-color: #FBBF24; color: #1A202C; font-weight: 600;} /* Active state for chart buttons */
+        .btn-subtle:not(.active):hover { background-color: #4A5568; color: #E2E8F0; }
+        .btn.disabled, .btn:disabled { background-color: #718096; color: #A0AEC0; cursor: not-allowed; transform: none; box-shadow: none; opacity: 0.7; }
+
+
+        /* Chart Container (Main page) */
+        .chart-options { margin-bottom: 1rem; display: flex; justify-content: center; align-items: center; gap: 0.75rem; }
+        .chart-container { position: relative; margin: auto; height: 280px; width: 100%; background-color: #252E3D; padding: 1rem; border-radius: 0.5rem; box-shadow: inset 0 2px 4px rgba(0,0,0,0.2); }
+        
 
         /* Exportable Results (Hidden) */
         #exportableResultsContainer { position: fixed; top: -9999px; left: -9999px; opacity: 0; z-index: -1; }
@@ -171,27 +254,33 @@
         /* Custom Message Box */
         .custom-message-box { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background-color: #FBBF24; color: #1A202C; padding: 12px 20px; border-radius: 6px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); z-index: 2000; font-weight: 600; font-size: 0.9rem; opacity: 0; transition: opacity 0.3s ease-in-out, bottom 0.3s ease-in-out; pointer-events: none; }
         .custom-message-box.show { opacity: 1; bottom: 30px; pointer-events: auto; }
+        
 
         /* Responsive Adjustments */
         @media (min-width: 640px) { /* sm breakpoint */
-            header h1 { font-size: 2.25rem; }
-            header .subtitle { font-size: 1rem; }
-            header .app-subtitle { font-size: 1.25rem; }
-            .tab-button { padding: 0.75rem 1.5rem; font-size: 1rem; }
+            header h1 { font-size: 2.5rem; }
+            header .subtitle { font-size: 1.1rem; }
+            header .app-subtitle { font-size: 1.3rem; }
+            .tab-button { padding: 0.85rem 1.75rem; font-size: 1rem; }
             .card { padding: 1.5rem; }
-            .card h3 { font-size: 1.25rem; }
-            .card p, .card label { font-size: 0.9rem; }
-            .leaderboard-table th { font-size: 0.875rem; }
-            .leaderboard-table td { font-size: 0.9rem; }
-            .btn { padding: 0.75rem 1.5rem; font-size: 1rem; }
-            .chart-container { height: 350px; }
-            .modal .chart-container { height: 220px; width: 220px; }
-            .modal-content { padding: 2rem; }
+            .card h3 { font-size: 1.3rem; }
+            .card p, .card label { font-size: 0.95rem; }
+            .leaderboard-table th { font-size: 0.9rem; }
+            .leaderboard-table td { font-size: 0.95rem; }
+            .btn { padding: 0.8rem 1.6rem; font-size: 1rem; } 
+            .modal-footer .btn { padding: 0.6rem 1.2rem; font-size: 0.9rem; } 
+            .chart-container { height: 350px; } /* Main chart container */
+            .modal-body .chart-container { height: 200px; width: 200px; } /* Modal chart container */
+            .modal-content { padding: 0; }
+            .modal-header { padding: 1.5rem 2rem; }
+            .modal-body { padding: 1.5rem 2rem; } 
         }
         @media (min-width: 768px) { /* md breakpoint */
-            .chart-container { height: 400px; }
-            .modal-content h3 { font-size: 2rem; }
-            .modal .chart-container { height: 250px; width: 250px; }
+            .chart-container { height: 400px; } /* Main chart container */
+            .modal-country-name { font-size: 2rem; }
+            .modal-song-title { font-size: 1.2rem; }
+            .modal-artist-name { font-size: 1rem; }
+            .modal-body .chart-container { height: 220px; width: 220px; } /* Modal chart container */
         }
         
         .leaderboard-table-container::-webkit-scrollbar { display: none; }
@@ -201,7 +290,7 @@
 </head>
 <body class="min-h-screen p-0 md:p-4">
 
-    <header class="mb-6 md:mb-8 shadow-md">
+    <header class="mb-6 md:mb-8 shadow-lg">
         <div class="eurovision-logo-container">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
@@ -213,32 +302,35 @@
     </header>
 
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-8">
-        <div class="mb-6 flex space-x-2 sm:space-x-3 justify-center">
+        <div class="tab-button-container mb-8">
             <button id="voteTabButton" class="tab-button active" onclick="showTab('vote')">Vote</button>
             <button id="leaderboardTabButton" class="tab-button" onclick="showTab('leaderboard')">Leaderboard</button>
             <button id="chartsTabButton" class="tab-button" onclick="showTab('charts')">Charts</button>
         </div>
 
         <div id="voteTab" class="tab-content">
-            <div id="votingForm" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div id="votingForm" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
                 </div>
-            <div class="mt-8 text-center space-y-3 sm:space-y-0 sm:space-x-4">
+            <div class="mt-8 text-center space-y-3 sm:space-y-0 sm:flex sm:flex-wrap sm:justify-center sm:gap-4">
                 <button class="btn w-full sm:w-auto text-lg px-8 py-3" onclick="submitVotes()">Submit All Votes</button>
                 <button class="btn btn-danger w-full sm:w-auto text-lg px-8 py-3" onclick="resetAllVotes()">Reset All Votes</button>
             </div>
         </div>
 
         <div id="leaderboardTab" class="tab-content hidden">
-            <h2 class="text-2xl sm:text-3xl font-semibold mb-4 sm:mb-6 text-center theme-primary">Leaderboard</h2>
+            <div class="flex flex-col sm:flex-row justify-between items-center mb-4 sm:mb-6">
+                <h2 class="text-2xl sm:text-3xl font-semibold text-center sm:text-left theme-primary mb-3 sm:mb-0">Leaderboard</h2>
+            </div>
             <div class="leaderboard-table-container"> 
                 <table id="leaderboardTable" class="min-w-full leaderboard-table">
                     <thead>
                         <tr>
                             <th class="rank-col">Rank</th>
                             <th class="country-col">Country</th>
-                            <th class="artist-col">Artist - Song</th>
                             <th class="score-col">Score</th>
-                            <th class="details-col">Votes</th> </tr>
+                            <th class="details-col">Votes</th>
+                            <th class="artist-song-col">Artist - Song</th> 
+                        </tr>
                     </thead>
                     <tbody>
                         </tbody>
@@ -247,30 +339,52 @@
         </div>
 
         <div id="chartsTab" class="tab-content hidden">
-            <h2 class="text-2xl sm:text-3xl font-semibold mb-4 sm:mb-6 text-center theme-primary">Results Visualisation</h2>
+            <h2 class="text-2xl sm:text-3xl font-semibold mb-2 text-center theme-primary">Results Visualisation</h2>
+            <div class="chart-options mb-6">
+                <span class="text-sm text-gray-400">Display:</span>
+                <button id="chartDisplayAllButton" class="btn btn-subtle active" onclick="setChartDisplayMode('all')">All Scores</button>
+                <button id="chartDisplayTop10Button" class="btn btn-subtle" onclick="setChartDisplayMode('top10')">Top 10</button>
+            </div>
             <div class="bg-theme-surface p-3 sm:p-4 rounded-lg border border-theme-highlight shadow-lg mb-6">
-                <div class="chart-container mx-auto">
-                    <canvas id="totalScoresChart"></canvas>
+                <div class="chart-container mx-auto"> <canvas id="totalScoresChart"></canvas>
                 </div>
             </div>
-             <div class="mt-6 text-center space-y-3 sm:space-y-0 sm:space-x-4">
+             <div class="mt-6 text-center space-y-3 sm:space-y-0 sm:flex sm:flex-wrap sm:justify-center sm:gap-4">
                 <button class="btn w-full sm:w-auto" onclick="exportResultsSummary()">Export Text Summary</button>
                 <button class="btn w-full sm:w-auto" onclick="exportResultsAsImage()">Export as Image</button>
             </div>
         </div>
     </div>
 
-    <div id="scoreBreakdownModal" class="modal hidden">
+    <div id="scoreBreakdownModal" class="modal">
         <div class="modal-content">
-            <div class="flex justify-end items-start"> <button class="text-gray-400 hover:text-white text-3xl leading-none -mt-2 -mr-2" onclick="closeModal()">&times;</button>
-            </div>
-            <h3 id="modalCountryName" class="text-xl font-semibold mb-3"></h3>
-            <div id="modalScoreDetails" class="modal-score-details-grid mb-6 text-sm">
+            <div class="modal-header">
+                <div class="modal-header-content">
+                    <h3 class="flex items-center">
+                        <span id="modalCountryFlag" class="modal-country-flag"></span>
+                        <span id="modalCountryName" class="modal-country-name"></span>
+                    </h3>
+                    <div id="modalSongArtistInfo" class="modal-song-artist">
+                        <p id="modalSongTitle" class="modal-song-title"></p>
+                        <p id="modalArtistName" class="modal-artist-name"></p>
+                    </div>
                 </div>
-            <div class="chart-container mx-auto"> <canvas id="categoryBreakdownChart"></canvas>
+                <button class="modal-close-btn" onclick="closeModal('scoreBreakdownModal')" aria-label="Close modal">&times;</button>
             </div>
+            <div class="modal-body">
+                <div id="modalScore_countryId_temp" data-countryid=""></div> 
+                <div class="chart-container mx-auto"> <canvas id="categoryBreakdownChart"></canvas>
+                </div>
+                <div id="modalScoreEditor" class="modal-score-editor">
+                    </div>
             </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary mr-2" onclick="closeModal('scoreBreakdownModal')">Cancel</button>
+                <button id="updateVotesFromModalButton" class="btn" onclick="updateVotesFromModal()" disabled>Update Votes</button>
+            </div>
+        </div>
     </div>
+
 
     <div id="exportableResultsContainer">
         <div id="exportableResults">
@@ -284,47 +398,50 @@
     <script>
         // Eurovision 2025 Entries (Sample Data)
         const entries = [
-            { id: 1, country: "Noruega", artist: "KYLE ALESSANDRO", song: "Lighter", flag: "🇳🇴" },
-            { id: 2, country: "Luxemburgo", artist: "LAURA THORN", song: "La Poupée Mante Le Son", flag: "🇱🇺" },
+            { id: 1, country: "Norway", artist: "KYLE ALESSANDRO", song: "Lighter", flag: "🇳🇴" },
+            { id: 2, country: "Luxembourg", artist: "LAURA THORN", song: "La Poupée Mante Le Son", flag: "🇱🇺" },
             { id: 3, country: "Estonia", artist: "TOMMY CASH", song: "Espresso Macchiato", flag: "🇪🇪" },
             { id: 4, country: "Israel", artist: "YUVAL RAPHAEL", song: "New day will Rise", flag: "🇮🇱" },
-            { id: 5, country: "Lituania", artist: "KATARSIS", song: "Tavo Akys", flag: "🇱🇹" },
-            { id: 6, country: "España", artist: "MELODY", song: "Esa Diva", flag: "🇪🇸" },
-            { id: 7, country: "Ucrania", artist: "ZIFERBLAT", song: "Bird of Pray", flag: "🇺🇦" },
-            { id: 8, country: "Reino Unido", artist: "REMEMBER MONDAY", song: "What the Hell pust Happened?", flag: "🇬🇧" },
+            { id: 5, country: "Lithuania", artist: "KATARSIS", song: "Tavo Akys", flag: "🇱🇹" },
+            { id: 6, country: "Spain", artist: "MELODY", song: "Esa Diva", flag: "🇪🇸" },
+            { id: 7, country: "Ukraine", artist: "ZIFERBLAT", song: "Bird of Pray", flag: "🇺🇦" },
+            { id: 8, country: "United Kingdom", artist: "REMEMBER MONDAY", song: "What the Hell pust Happened?", flag: "🇬🇧" },
             { id: 9, country: "Austria", artist: "لا (Artist Name)", song: "Wasted Love", flag: "🇦🇹" },
-            { id: 10, country: "Islandia", artist: "VAEB", song: "Ron", flag: "🇮🇸" },
-            { id: 11, country: "Letonia", artist: "TAUTUMEITAS", song: "Bur Man Laimi", flag: "🇱🇻" },
-            { id: 12, country: "Países Bajos", artist: "CLAUDE", song: "C'est Lo Vie", flag: "🇳🇱" },
-            { id: 13, country: "Finlandia", artist: "ERIKA VIKMAN", song: "Ích Komme", flag: "🇫🇮" },
-            { id: 14, country: "Italia", artist: "LUCIO CORSI", song: "Volevo Essere un Duro", flag: "🇮🇹" },
-            { id: 15, country: "Polonia", artist: "JUSTYNA", song: "Gaja", flag: "🇵🇱" },
-            { id: 16, country: "Alemania", artist: "ABOR & TΥΝΝΑ", song: "Baller", flag: "🇩🇪" },
-            { id: 17, country: "Grecia", artist: "KLAVDIA", song: "Asteramóta", flag: "🇬🇷" },
+            { id: 10, country: "Iceland", artist: "VAEB", song: "Ron", flag: "🇮🇸" },
+            { id: 11, country: "Latvia", artist: "TAUTUMEITAS", song: "Bur Man Laimi", flag: "🇱🇻" },
+            { id: 12, country: "Netherlands", artist: "CLAUDE", song: "C'est Lo Vie", flag: "🇳🇱" },
+            { id: 13, country: "Finland", artist: "ERIKA VIKMAN", song: "Ích Komme", flag: "🇫🇮" },
+            { id: 14, country: "Italy", artist: "LUCIO CORSI", song: "Volevo Essere un Duro", flag: "🇮🇹" },
+            { id: 15, country: "Poland", artist: "JUSTYNA", song: "Gaja", flag: "🇵🇱" },
+            { id: 16, country: "Germany", artist: "ABOR & TΥΝΝΑ", song: "Baller", flag: "🇩🇪" },
+            { id: 17, country: "Greece", artist: "KLAVDIA", song: "Asteramóta", flag: "🇬🇷" },
             { id: 18, country: "Armenia", artist: "PARG", song: "Survivor", flag: "🇦🇲" },
-            { id: 19, country: "Suiza", artist: "ZOË MË", song: "Voyage", flag: "🇨🇭" },
+            { id: 19, country: "Switzerland", artist: "ZOË MË", song: "Voyage", flag: "🇨🇭" },
             { id: 20, country: "Malta", artist: "MIRIANA CONTE", song: "Serving", flag: "🇲🇹" },
             { id: 21, country: "Portugal", artist: "NAPA", song: "Deslocado", flag: "🇵🇹" },
-            { id: 22, country: "Dinamarca", artist: "SISSAL", song: "Hallucination", flag: "🇩🇰" },
-            { id: 23, country: "Suecia", artist: "KAJ", song: "Bara Bado Bostu", flag: "🇸🇪" },
-            { id: 24, country: "Francia", artist: "LOUANE", song: "Maman", flag: "🇫🇷" },
+            { id: 22, country: "Denmark", artist: "SISSAL", song: "Hallucination", flag: "🇩🇰" },
+            { id: 23, country: "Sweden", artist: "KAJ", song: "Bara Bado Bostu", flag: "🇸🇪" },
+            { id: 24, country: "France", artist: "LOUANE", song: "Maman", flag: "🇫🇷" },
             { id: 25, country: "San Marino", artist: "GABRY PONTE", song: "Tutto l'italia", flag: "🇸🇲" },
             { id: 26, country: "Albania", artist: "SHKODRA ELEKTRONIKE", song: "Zierm", flag: "🇦🇱" }
         ];
 
         const categories = [
+            // Order here defines the tie-breaking preference if total scores are equal
+            { id: 'overall', name: 'Overall', short: 'O', maxPoints: 3 },
             { id: 'song', name: 'Song', short: 'S', maxPoints: 3 },
-            { id: 'artist', name: 'Artist', short: 'A', maxPoints: 3 },
             { id: 'performance', name: 'Performance', short: 'P', maxPoints: 3 },
-            { id: 'overall', name: 'Overall', short: 'O', maxPoints: 3 }
+            { id: 'artist', name: 'Artist', short: 'A', maxPoints: 3 }
         ];
 
         let votes = {}; 
         let totalScoresChartInstance = null;
         let categoryBreakdownChartInstance = null;
-        let votesChangedSinceLastSave = false; // Flag for beforeunload warning
+        let votesChangedSinceLastSave = false;
+        let currentChartDisplayMode = 'all';
+        let modalVotesChanged = false; 
+        let tempModalScores = {}; 
 
-        // Chart.js plugin to draw text in the middle of a doughnut chart
         const doughnutTextPlugin = {
             id: 'doughnutText',
             afterDraw(chart, args, options) {
@@ -333,26 +450,21 @@
                     ctx.save();
                     const x = width / 2;
                     const y = height / 2;
-                    
-                    // Main text (Total Score)
                     ctx.font = options.font || 'bold 28px Inter';
                     ctx.fillStyle = options.color || '#FBBF24';
                     ctx.textAlign = 'center';
                     ctx.textBaseline = 'middle';
-                    ctx.fillText(options.text, x, y + (options.textOffsetY || -10)); // Adjusted Y for main text
-
-                    // Sub text ("Total Pts")
+                    ctx.fillText(options.text, x, y + (options.textOffsetY || -10));
                     if (options.subText) {
                         ctx.font = options.subTextFont || 'normal 12px Inter';
                         ctx.fillStyle = options.subTextColor || '#CBD5E0';
-                        // Position subtext below main text
-                        ctx.fillText(options.subText, x, y + (options.subTextOffsetY || 15)); // Adjusted Y for subtext
+                        ctx.fillText(options.subText, x, y + (options.subTextOffsetY || 15));
                     }
                     ctx.restore();
                 }
             }
         };
-        Chart.register(doughnutTextPlugin); // Register the plugin globally
+        Chart.register(doughnutTextPlugin);
 
         function showCustomMessage(message, duration = 3000) {
             const messageBox = document.getElementById('customMessageBox');
@@ -362,6 +474,7 @@
         }
 
         function updateSliderVisual(slider) {
+            if (!slider) return;
             const min = parseFloat(slider.min);
             const max = parseFloat(slider.max);
             const value = parseFloat(slider.value);
@@ -370,6 +483,44 @@
             slider.style.background = `linear-gradient(to right, #FBBF24 ${fillPercentage}%, #4A5568 ${fillPercentage}%)`;
         }
         
+        // Creates HTML for a category input (slider for main form, number input for modal)
+        function createCategoryInputHTML(entryId, category, currentValue, isModal = false) {
+            const inputId = `cat-input-${category.id}-${isModal ? 'modal-' : ''}${entryId}`;
+            const valueDisplayId = `val-display-${category.id}-${isModal ? 'modal-' : ''}${entryId}`;
+
+            if (isModal) {
+                // Number input for modal
+                return `
+                    <div class="modal-score-item-editor">
+                        <label for="${inputId}" class="block text-sm font-medium">${category.name} (0-${category.maxPoints} pts)</label>
+                        <input type="number" id="${inputId}" name="${inputId}" 
+                               min="0" max="${category.maxPoints}" value="${currentValue}"
+                               oninput="updateScoreDisplayInModal(${entryId}, '${category.id}', this.value, this)"
+                               onchange="updateScoreDisplayInModal(${entryId}, '${category.id}', this.value, this)" /* Handle direct input change */
+                               class="w-16 p-1 text-center bg-gray-700 border border-gray-600 rounded">
+                    </div>`;
+            } else {
+                // Slider for main voting form
+                return `
+                    <div class="modal-score-item">
+                        <div class="flex justify-between items-center mb-1">
+                            <label for="${inputId}" class="block text-sm font-medium">${category.name} (0-${category.maxPoints} pts)</label>
+                            <span id="${valueDisplayId}" class="score-output">${currentValue}</span>
+                        </div>
+                        <div class="slider-container">
+                            <input type="range" id="${inputId}" name="${inputId}" 
+                                   min="0" max="${category.maxPoints}" value="${currentValue}" step="1"
+                                   oninput="updateScoreDisplay(${entryId}, '${category.id}', this.value, this, '${valueDisplayId}')"
+                                   aria-labelledby="label-${inputId}">
+                            <div class="slider-ticks">
+                                ${Array.from({ length: category.maxPoints + 1 }, (_, i) => `<span>${i}</span>`).join('')}
+                            </div>
+                        </div>
+                    </div>`;
+            }
+        }
+
+
         function initVotingForm() {
             const votingForm = document.getElementById('votingForm');
             votingForm.innerHTML = ''; 
@@ -378,70 +529,95 @@
                 card.className = 'card';
                 const currentEntryVotes = votes[entry.id] || {};
                 let categoryHTML = '';
-                categories.forEach(cat => {
+                // Iterate in the order defined in `categories` for consistent display
+                categories.forEach(cat => { 
                     const currentValue = currentEntryVotes[cat.id] || 0;
-                    categoryHTML += `
-                        <div class="mb-2">
-                            <div class="flex justify-between items-center mb-1">
-                                <label for="cat-${entry.id}-${cat.id}" class="block text-sm font-medium">${cat.name} (0-${cat.maxPoints} pts)</label>
-                                <span id="val-${entry.id}-${cat.id}" class="score-output">${currentValue}</span>
-                            </div>
-                            <div class="slider-container">
-                                <input type="range" id="cat-${entry.id}-${cat.id}" name="cat-${entry.id}-${cat.id}" 
-                                       min="0" max="${cat.maxPoints}" value="${currentValue}" step="1"
-                                       oninput="updateScoreDisplay(${entry.id}, '${cat.id}', this.value, this)"
-                                       aria-labelledby="label-cat-${entry.id}-${cat.id}">
-                                <div class="slider-ticks">
-                                    ${Array.from({ length: cat.maxPoints + 1 }, (_, i) => `<span>${i}</span>`).join('')}
-                                </div>
-                            </div>
-                        </div>`;
+                    categoryHTML += createCategoryInputHTML(entry.id, cat, currentValue, false);
                 });
+
                 card.innerHTML = `
                     <h3 class="text-lg font-semibold mb-1">${entry.flag} ${entry.country}</h3>
-                    <p class="text-xs text-gray-400 mb-3">${entry.artist} - "${entry.song}"</p>
+                    <p class="text-xs text-gray-400 mb-4">${entry.artist} - "${entry.song}"</p>
                     ${categoryHTML}
-                    <div class="mt-3 text-right">
+                    <div class="mt-4 text-right">
                         <strong class="text-md">Total: <span id="total-${entry.id}" class="total-entry-score">0</span> / ${categories.reduce((sum, cat) => sum + cat.maxPoints, 0)} pts</strong>
                     </div>`;
                 votingForm.appendChild(card);
                 categories.forEach(cat => {
-                    const slider = card.querySelector(`#cat-${entry.id}-${cat.id}`);
-                    if (slider) updateSliderVisual(slider);
+                    const slider = card.querySelector(`#cat-input-${cat.id}-${entry.id}`);
+                    if (slider && slider.type === 'range') updateSliderVisual(slider);
                 });
                 updateEntryTotal(entry.id); 
             });
         }
 
-        function updateScoreDisplay(countryId, categoryId, value, sliderElement) {
-            document.getElementById(`val-${countryId}-${categoryId}`).textContent = value;
+        function updateScoreDisplay(countryId, categoryId, value, sliderElement, valueDisplayId) {
+            document.getElementById(valueDisplayId).textContent = value;
+            
             if (!votes[countryId]) votes[countryId] = {};
             votes[countryId][categoryId] = parseInt(value);
-            updateEntryTotal(countryId);
-            if (sliderElement) updateSliderVisual(sliderElement);
-            votesChangedSinceLastSave = true; // Mark changes as unsaved
+            updateEntryTotal(countryId); 
+            votesChangedSinceLastSave = true;
+            
+            if (sliderElement && sliderElement.type === 'range') updateSliderVisual(sliderElement);
+        }
+
+        function updateScoreDisplayInModal(countryId, categoryId, value) {
+            const numericValue = parseInt(value);
+            const maxPoints = categories.find(c => c.id === categoryId).maxPoints;
+
+            // Validate and clamp the value
+            let clampedValue = isNaN(numericValue) ? 0 : Math.max(0, Math.min(numericValue, maxPoints));
+            
+            const inputElement = document.getElementById(`cat-input-${categoryId}-modal-${countryId}`);
+            if (inputElement && parseInt(inputElement.value) !== clampedValue) {
+                 inputElement.value = clampedValue; // Update input if value was clamped
+            }
+
+            if (!tempModalScores[countryId]) tempModalScores[countryId] = {};
+            // Only update if the clamped value is different from the current temp score
+            if (tempModalScores[countryId][categoryId] !== clampedValue) {
+                tempModalScores[countryId][categoryId] = clampedValue;
+                modalVotesChanged = true;
+                document.getElementById('updateVotesFromModalButton').disabled = false;
+            }
+
+
+            // Update doughnut chart in modal live
+            if (categoryBreakdownChartInstance) {
+                let totalForDoughnut = 0;
+                categoryBreakdownChartInstance.data.datasets[0].data = categories.map(cat => {
+                    const score = tempModalScores[countryId][cat.id] || 0;
+                    totalForDoughnut += score;
+                    return score;
+                });
+                categoryBreakdownChartInstance.options.plugins.doughnutText.text = totalForDoughnut.toString();
+                categoryBreakdownChartInstance.update('none'); 
+            }
         }
         
-        function updateEntryTotal(countryId) {
+        function updateEntryTotal(countryId, specificVotes) {
             let total = 0;
-            if (votes[countryId]) {
-                categories.forEach(cat => { total += votes[countryId][cat.id] || 0; });
+            const currentVotesToCalc = specificVotes || votes[countryId]; 
+            if (currentVotesToCalc) {
+                categories.forEach(cat => { total += currentVotesToCalc[cat.id] || 0; });
             }
-            const totalElement = document.getElementById(`total-${countryId}`);
+            const totalElement = document.getElementById(`total-${countryId}`); 
             if (totalElement) totalElement.textContent = total;
+            return total;
         }
 
         function saveVotes() {
             localStorage.setItem('eurovisionVotesPostugangApp', JSON.stringify(votes));
-            votesChangedSinceLastSave = false; // Mark changes as saved
+            votesChangedSinceLastSave = false;
         }
 
         function loadVotesAndInitializeForm() {
             const savedVotes = localStorage.getItem('eurovisionVotesPostugangApp');
             if (savedVotes) votes = JSON.parse(savedVotes);
-            else votes = {}; 
+            else votes = {};
             initVotingForm();
-            votesChangedSinceLastSave = false; // Initial load is considered saved
+            votesChangedSinceLastSave = false;
         }
         
         function submitVotes() {
@@ -453,38 +629,54 @@
         }
 
         function resetAllVotes() {
-            if (confirm("Are you sure you want to reset all votes? This cannot be undone.")) {
+            if (confirm("Are you sure you want to reset all votes? This action cannot be undone.")) {
                 votes = {}; 
                 localStorage.removeItem('eurovisionVotesPostugangApp');
                 initVotingForm(); 
                 updateLeaderboard(); 
                 updateCharts(); 
-                votesChangedSinceLastSave = false; // Reset state is a clean state
+                votesChangedSinceLastSave = false;
                 showCustomMessage('All votes have been reset.');
                 showTab('vote');
             }
         }
 
         function calculateTotalScores() {
-            return entries.map(entry => {
+            let ranked = entries.map(entry => {
                 let totalScore = 0;
                 let breakdown = {};
-                categories.forEach(cat => { breakdown[cat.id] = 0; });
-                if (votes[entry.id]) {
-                    categories.forEach(cat => {
-                        const score = votes[entry.id][cat.id] || 0;
-                        totalScore += score;
-                        breakdown[cat.id] = score;
-                    });
-                }
+                // Ensure all categories are present in breakdown, even if score is 0
+                categories.forEach(cat => { 
+                    const score = (votes[entry.id] && votes[entry.id][cat.id] !== undefined) ? votes[entry.id][cat.id] : 0;
+                    totalScore += score;
+                    breakdown[cat.id] = score;
+                });
                 return { ...entry, totalScore, breakdown };
-            }).sort((a, b) => b.totalScore - a.totalScore); 
-        }
+            });
 
+            // Sort with tie-breaking
+            ranked.sort((a, b) => {
+                if (b.totalScore !== a.totalScore) {
+                    return b.totalScore - a.totalScore;
+                }
+                // Tie-breaking by category scores in predefined order
+                for (const category of categories) { // `categories` array is already in tie-breaking preference order
+                    const scoreA = a.breakdown[category.id] || 0;
+                    const scoreB = b.breakdown[category.id] || 0;
+                    if (scoreB !== scoreA) {
+                        return scoreB - scoreA;
+                    }
+                }
+                // Final tie-breaker: alphabetical by country name
+                return a.country.localeCompare(b.country);
+            });
+            return ranked;
+        }
+        
         function updateLeaderboard() {
             const leaderboardBody = document.getElementById('leaderboardTable').getElementsByTagName('tbody')[0];
             leaderboardBody.innerHTML = ''; 
-            const rankedScores = calculateTotalScores();
+            const rankedScores = calculateTotalScores(); 
             if (rankedScores.length === 0 || rankedScores.every(e => e.totalScore === 0 && Object.values(e.breakdown).every(s => s === 0) )) {
                 const row = leaderboardBody.insertRow();
                 const cell = row.insertCell();
@@ -499,94 +691,202 @@
                 row.innerHTML = `
                     <td class="rank-col">${index + 1}</td>
                     <td class="country-col">${entry.flag} ${entry.country}</td>
-                    <td class="artist-col">${entry.artist} - "${entry.song}"</td>
                     <td class="score-col">${entry.totalScore}</td>
                     <td class="details-col">
                         <button class="btn btn-secondary details-button" onclick="showScoreBreakdown(${entry.id})">
                             ${voteBreakdownString}
                         </button>
-                    </td>`;
+                    </td>
+                    <td class="artist-song-col">${entry.artist} - "${entry.song}"</td>`;
             });
+        }
+        
+        function setChartDisplayMode(mode) {
+            currentChartDisplayMode = mode;
+            // Ensure correct highlighting for chart display buttons
+            document.getElementById('chartDisplayAllButton').classList.toggle('active', mode === 'all');
+            document.getElementById('chartDisplayTop10Button').classList.toggle('active', mode === 'top10');
+            updateCharts();
         }
 
         function updateCharts() {
-            const rankedScores = calculateTotalScores();
-            const chartableScores = (Object.keys(votes).length === 0) ? rankedScores : rankedScores.filter(e => e.totalScore > 0);
+            const allRankedScores = calculateTotalScores(); 
+            let chartableScores = allRankedScores;
+
+            if (currentChartDisplayMode === 'top10') {
+                chartableScores = allRankedScores.slice(0, 10).filter(e => e.totalScore > 0 || Object.keys(votes).length === 0);
+                 if (chartableScores.length === 0 && allRankedScores.some(e => e.totalScore > 0)) {
+                    chartableScores = allRankedScores.filter(e => e.totalScore > 0).slice(0,10);
+                }
+            } // No 'else' needed as chartableScores defaults to allRankedScores if not 'top10'
+            
             const labels = chartableScores.map(e => `${e.flag} ${e.country.substring(0,12)}${e.country.length > 12 ? '...' : ''}`);
+            // Use the globally defined `categories` order for chart datasets
             const categoryChartColors = { song: 'rgba(251, 191, 36, 0.8)', artist: 'rgba(96, 165, 250, 0.8)', performance: 'rgba(248, 113, 113, 0.8)', overall: 'rgba(52, 211, 153, 0.8)' };
             const categoryChartBorderColor = '#1A202C';
-            const datasets = categories.map(cat => ({ label: cat.name, data: chartableScores.map(entry => entry.breakdown[cat.id] || 0), backgroundColor: categoryChartColors[cat.id], borderColor: categoryChartBorderColor, borderWidth: 1, borderRadius: 3 }));
+            const datasets = categories.map(cat => ({ 
+                label: cat.name, 
+                data: chartableScores.map(entry => entry.breakdown[cat.id] || 0), 
+                backgroundColor: categoryChartColors[cat.id], 
+                borderColor: categoryChartBorderColor, 
+                borderWidth: 1, 
+                borderRadius: 4 
+            }));
+            
             const ctx = document.getElementById('totalScoresChart').getContext('2d');
             if (totalScoresChartInstance) totalScoresChartInstance.destroy();
+            
+            if (labels.length === 0 && Object.keys(votes).length > 0) {
+                 ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+                 ctx.save();
+                 ctx.textAlign = 'center';
+                 ctx.textBaseline = 'middle';
+                 ctx.font = '16px Inter';
+                 ctx.fillStyle = '#9CA3AF';
+                 ctx.fillText(currentChartDisplayMode === 'top10' ? 'No scores in the Top 10 yet.' : 'No scores to display yet.', ctx.canvas.width / 2, ctx.canvas.height / 2);
+                 ctx.restore();
+                 return;
+            }
+
             totalScoresChartInstance = new Chart(ctx, {
                 type: 'bar', data: { labels: labels, datasets: datasets },
-                options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', scales: { x: { stacked: true, beginAtZero: true, ticks: { color: '#A0AEC0', font: { weight: '500' } }, grid: { color: 'rgba(160, 174, 192, 0.15)'} }, y: { stacked: true, ticks: { color: '#CBD5E0', font: {size: 10, weight: '500'} }, grid: { display: false } } },
-                    plugins: { legend: { display: true, position: 'bottom', labels: { color: '#A0AEC0', font: {size: 11, weight: '500'}, padding: 15 } },
-                        tooltip: { backgroundColor: 'rgba(26, 32, 44, 0.9)', titleColor: '#FBBF24', bodyColor: '#E2E8F0', borderColor: '#4A5568', borderWidth: 1, padding: 10, callbacks: { label: context => `${context.dataset.label || ''}: ${context.parsed.x} pts`, footer: tooltipItems => { let sum = 0; if (tooltipItems.length > 0) { const dataIndex = tooltipItems[0].dataIndex; totalScoresChartInstance.data.datasets.forEach(dataset => { sum += dataset.data[dataIndex] || 0; }); } return 'Total: ' + sum + ' pts'; } } } } }
+                options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', 
+                    scales: { 
+                        x: { stacked: true, beginAtZero: true, ticks: { color: '#A0AEC0', font: { weight: '500' } }, grid: { color: 'rgba(160, 174, 192, 0.15)'} }, 
+                        y: { stacked: true, ticks: { color: '#CBD5E0', font: {size: 10, weight: '500'} }, grid: { display: false } } 
+                    },
+                    plugins: { 
+                        legend: { display: true, position: 'bottom', labels: { color: '#A0AEC0', font: {size: 11, weight: '500'}, padding: 15, boxWidth: 12, usePointStyle: true, pointStyle: 'rectRounded' } },
+                        tooltip: { backgroundColor: 'rgba(26, 32, 44, 0.9)', titleColor: '#FBBF24', bodyColor: '#E2E8F0', borderColor: '#4A5568', borderWidth: 1, padding: 10, callbacks: { label: context => `${context.dataset.label || ''}: ${context.parsed.x} pts`, footer: tooltipItems => { let sum = 0; if (tooltipItems.length > 0) { const dataIndex = tooltipItems[0].dataIndex; totalScoresChartInstance.data.datasets.forEach(dataset => { sum += dataset.data[dataIndex] || 0; }); } return 'Total: ' + sum + ' pts'; } } } 
+                    } 
+                }
             });
         }
-
+        
         function showScoreBreakdown(countryId) {
             const entry = entries.find(e => e.id === countryId);
             if (!entry) return;
-            const entryVotesData = votes[countryId] || {}; 
-            let totalScoreForEntry = 0;
-            categories.forEach(cat => { totalScoreForEntry += (entryVotesData[cat.id] || 0); });
-
-            document.getElementById('modalCountryName').textContent = `${entry.flag} ${entry.artist} - "${entry.song}"`; // Show artist and song
             
-            const detailsDiv = document.getElementById('modalScoreDetails');
-            detailsDiv.innerHTML = categories.map(cat => `
-                <div class="modal-score-item flex justify-between">
-                    <span>${cat.name}:</span>
-                    <span>${entryVotesData[cat.id] || 0} / ${cat.maxPoints}</span>
-                </div>`).join('');
+            document.getElementById('modalScore_countryId_temp').dataset.countryid = countryId; 
+            modalVotesChanged = false; 
+            document.getElementById('updateVotesFromModalButton').disabled = true; 
+
+            tempModalScores[countryId] = JSON.parse(JSON.stringify(votes[countryId] || {}));
+            categories.forEach(cat => { 
+                if (tempModalScores[countryId][cat.id] === undefined) {
+                    tempModalScores[countryId][cat.id] = 0;
+                }
+            });
+
+            document.getElementById('modalCountryFlag').textContent = entry.flag;
+            document.getElementById('modalCountryName').textContent = entry.country;
+            document.getElementById('modalSongTitle').textContent = `"${entry.song}"`;
+            document.getElementById('modalArtistName').textContent = entry.artist;
+            
+            // Populate number inputs for score editing in the modal
+            const scoreEditorDiv = document.getElementById('modalScoreEditor');
+            scoreEditorDiv.innerHTML = ''; 
+            let categoryInputsHTML = '';
+            // Iterate in the order defined in `categories` for consistent display
+            categories.forEach(cat => { 
+                const currentValue = tempModalScores[countryId][cat.id] || 0;
+                categoryInputsHTML += createCategoryInputHTML(countryId, cat, currentValue, true);
+            });
+            scoreEditorDiv.innerHTML = categoryInputsHTML;
+            
+            let totalScoreForEntry = 0;
+            categories.forEach(cat => { totalScoreForEntry += (tempModalScores[countryId][cat.id] || 0); });
 
             const modal = document.getElementById('scoreBreakdownModal');
-            modal.classList.remove('hidden');
+            modal.classList.add('show');
             document.body.style.overflow = 'hidden';
 
-            setTimeout(() => {
+            setTimeout(() => { // Render chart after modal is shown
                 const catCtx = document.getElementById('categoryBreakdownChart').getContext('2d');
                 if (!catCtx) { console.error("Category breakdown chart context not found!"); return; }
+                
                 const catLabels = categories.map(c => c.name);
-                const catData = categories.map(c => entryVotesData[c.id] || 0);
+                const catData = categories.map(c => tempModalScores[countryId][c.id] || 0);
                 const categoryChartColorsModal = { song: 'rgba(251, 191, 36, 0.9)', artist: 'rgba(96, 165, 250, 0.9)', performance: 'rgba(248, 113, 113, 0.9)', overall: 'rgba(52, 211, 153, 0.9)' };
                 const doughnutColors = categories.map(cat => categoryChartColorsModal[cat.id]);
 
                 if (categoryBreakdownChartInstance) categoryBreakdownChartInstance.destroy();
                 categoryBreakdownChartInstance = new Chart(catCtx, {
                     type: 'doughnut',
-                    data: { labels: catLabels, datasets: [{ label: 'Points by Category', data: catData, backgroundColor: doughnutColors, borderColor: '#2D3748', borderWidth: 3, hoverOffset: 8 }] },
-                    options: { responsive: true, maintainAspectRatio: false, cutout: '60%', // Makes doughnut thinner
+                    data: { labels: catLabels, datasets: [{ label: 'Points by Category', data: catData, backgroundColor: doughnutColors, borderColor: '#2D3748', borderWidth: 4, hoverOffset: 8 }] },
+                    options: { responsive: true, maintainAspectRatio: false, cutout: '65%',
                         plugins: {
-                            legend: { display: false }, // Legend can be removed if space is tight or info is clear
+                            legend: { display: true, position: 'bottom', labels: { color: '#A0AEC0', font: {size: 9}, padding: 8, boxWidth: 8, usePointStyle: true, pointStyle: 'rectRounded' } }, 
                             tooltip: { enabled: true, backgroundColor: 'rgba(26, 32, 44, 0.9)', titleColor: '#FBBF24', bodyColor: '#E2E8F0', callbacks: { label: context => `${context.label || ''}: ${context.parsed} pts` } },
-                            doughnutText: { // Custom plugin options
-                                text: totalScoreForEntry.toString(),
-                                font: 'bold 32px Inter', color: '#FBBF24', textOffsetY: -8,
-                                subText: 'Total Pts', subTextFont: 'normal 13px Inter', subTextColor: '#A0AEC0', subTextOffsetY: 18
-                            }
+                            doughnutText: { text: totalScoreForEntry.toString(), font: 'bold 24px Inter', color: '#FBBF24', textOffsetY: -6, subText: 'Total Pts', subTextFont: 'normal 10px Inter', subTextColor: '#A0AEC0', subTextOffsetY: 12 } 
                         }
                     }
                 });
             }, 50);
         }
+        
+        function updateVotesFromModal() {
+            const countryId = parseInt(document.getElementById('modalScore_countryId_temp').dataset.countryid);
+            if (!countryId || !entries.find(e => e.id === countryId) || !modalVotesChanged) return;
 
-        function closeModal() {
-            document.getElementById('scoreBreakdownModal').classList.add('hidden');
-            if (categoryBreakdownChartInstance) { categoryBreakdownChartInstance.destroy(); categoryBreakdownChartInstance = null; }
-            document.body.style.overflow = 'auto';
+            if (!votes[countryId]) votes[countryId] = {};
+            
+            categories.forEach(cat => {
+                votes[countryId][cat.id] = tempModalScores[countryId][cat.id] || 0;
+            });
+
+            saveVotes(); 
+            initVotingForm(); 
+            updateLeaderboard();
+            updateCharts();
+            
+            modalVotesChanged = false;
+            document.getElementById('updateVotesFromModalButton').disabled = true;
+
+            showCustomMessage('Votes updated from details!');
         }
-        document.addEventListener('keydown', event => { if (event.key === 'Escape' && !document.getElementById('scoreBreakdownModal').classList.contains('hidden')) closeModal(); });
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) modal.classList.remove('show');
+            if (modalId === 'scoreBreakdownModal') {
+                if (categoryBreakdownChartInstance) {
+                    categoryBreakdownChartInstance.destroy();
+                    categoryBreakdownChartInstance = null;
+                }
+                modalVotesChanged = false; 
+                tempModalScores = {}; 
+                const updateButton = document.getElementById('updateVotesFromModalButton');
+                if (updateButton) updateButton.disabled = true;
+            }
+            
+            const anyModalOpen = document.querySelector('.modal.show');
+            if (!anyModalOpen) {
+                document.body.style.overflow = 'auto';
+            }
+        }
+        document.addEventListener('keydown', event => { 
+            if (event.key === 'Escape') {
+                if (document.getElementById('scoreBreakdownModal').classList.contains('show')) closeModal('scoreBreakdownModal');
+            }
+        });
 
         function showTab(tabName) {
-            ['vote', 'leaderboard', 'charts'].forEach(tabId => { document.getElementById(tabId + 'Tab').classList.add('hidden'); document.getElementById(tabId + 'TabButton').classList.remove('active'); });
+            ['vote', 'leaderboard', 'charts'].forEach(tabId => { 
+                document.getElementById(tabId + 'Tab').classList.add('hidden'); 
+                document.getElementById(tabId + 'TabButton').classList.remove('active'); 
+            });
             document.getElementById(tabName + 'Tab').classList.remove('hidden');
             document.getElementById(tabName + 'TabButton').classList.add('active');
-            if (tabName !== 'vote') saveVotes(); 
+            
+            if (tabName !== 'vote') { 
+                 if (votesChangedSinceLastSave) saveVotes(); 
+            }
             if (tabName === 'leaderboard') updateLeaderboard();
-            if (tabName === 'charts') updateCharts();
+            if (tabName === 'charts') { 
+                // Ensure chart display mode buttons are correctly set when tab becomes active
+                setChartDisplayMode(currentChartDisplayMode); 
+            }
         }
         
         function exportResultsSummary() {
@@ -623,20 +923,18 @@
             finally { exportableDivContainer.style.opacity = '0'; exportableDivContainer.style.top = '-9999px'; exportableDivContainer.style.left = '-9999px'; exportableDivContainer.style.zIndex = '-1'; }
         }
 
-        // Warn user if they try to leave with unsaved changes
         window.addEventListener('beforeunload', function (e) {
-            if (votesChangedSinceLastSave) {
-                e.preventDefault(); // Required for Chrome
-                e.returnValue = ''; // Required for Chrome and Firefox
-                return ''; // For older browsers
+            if (votesChangedSinceLastSave || modalVotesChanged) { 
+                e.preventDefault(); e.returnValue = ''; return '';
             }
         });
 
         window.onload = function() {
             loadVotesAndInitializeForm(); 
-            updateLeaderboard(); updateCharts(); showTab('vote');
+            updateLeaderboard();
+            setChartDisplayMode('all'); // Initialize with 'all' and highlight button
+            showTab('vote');
         };
     </script>
 </body>
 </html>
-�
