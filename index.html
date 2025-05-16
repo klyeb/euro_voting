@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eurovision 2025 Voting System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #003366; /* Dark Blue */
+            color: #FFD700; /* Gold */
+        }
+        .eurovision-gold { color: #FFD700; }
+        .eurovision-blue { color: #003366; }
+        .bg-eurovision-blue { background-color: #003366; }
+        .bg-eurovision-gold { background-color: #FFD700; }
+        .border-eurovision-gold { border-color: #FFD700; }
+
+        .tab-button {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+            font-weight: 600;
+        }
+        .tab-button.active {
+            background-color: #FFD700; /* Gold */
+            color: #003366; /* Dark Blue */
+        }
+        .tab-button:not(.active) {
+            background-color: #004080; /* Lighter Blue */
+            color: #FFD700; /* Gold */
+        }
+        .tab-button:not(.active):hover {
+            background-color: #00509E; /* Even Lighter Blue on hover */
+        }
+
+        .card {
+            background-color: #004080; /* Lighter Blue */
+            border: 1px solid #FFD700; /* Gold border */
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .card h3 {
+            color: #FFD700; /* Gold */
+        }
+        .card p, .card label {
+            color: #FFFFFF; /* White text for better contrast on Lighter Blue */
+        }
+        input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 8px;
+            background: #00509E; /* Slider track color */
+            outline: none;
+            opacity: 0.9;
+            transition: opacity .2s;
+            border-radius: 4px;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #FFD700; /* Gold thumb */
+            cursor: pointer;
+            border-radius: 50%;
+            border: 2px solid #003366; /* Dark blue border for thumb */
+        }
+        input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            background: #FFD700; /* Gold thumb */
+            cursor: pointer;
+            border-radius: 50%;
+            border: 2px solid #003366; /* Dark blue border for thumb */
+        }
+        .score-output {
+            color: #FFD700; /* Gold */
+            font-weight: bold;
+        }
+        .total-entry-score {
+            color: #FFFFFF; /* White */
+            background-color: #00509E;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+        }
+        
+        /* Updated Leaderboard Table Styles */
+        .leaderboard-table-container {
+            overflow-x: auto; /* Ensures table is scrollable on small screens */
+            background-color: #003366; /* Match body or a specific shade */
+            border: 1px solid #FFD700;
+            border-radius: 0.75rem; /* Rounded corners for the container */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+        .leaderboard-table {
+            width: 100%; /* Tailwind's min-w-full is on the table element directly */
+            border-collapse: collapse; /* Clean borders */
+        }
+        .leaderboard-table th, .leaderboard-table td {
+            padding: 0.75rem 1rem; 
+            text-align: left;
+            vertical-align: middle; 
+            border-right: 1px solid #00509E; /* Vertical grid line */
+        }
+        .leaderboard-table th:last-child,
+        .leaderboard-table td:last-child {
+            border-right: none; /* No vertical border for the last column */
+        }
+        .leaderboard-table th {
+            color: #FFD700; /* Gold */
+            background-color: #002952; /* Darker Blue for header */
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid #FFD700; /* Prominent gold border for header separation */
+        }
+        .leaderboard-table td {
+            color: #FFFFFF; /* White text for general data */
+            border-bottom: 1px solid #00509E; /* Lighter blue separator for rows */
+            background-color: #003A70; /* Default background for cells (odd rows effectively) */
+        }
+        .leaderboard-table tr:nth-child(even) td {
+            background-color: #004080; /* Slightly different blue for even rows */
+        }
+        .leaderboard-table tr:last-child td {
+             /* No bottom border for cells in the last row if table container has its own border */
+            border-bottom: none;
+        }
+        .leaderboard-table tr:hover td {
+            background-color: #004887; /* Hover effect for rows */
+        }
+        .leaderboard-table .rank-col { 
+            text-align: center; 
+            font-weight: bold; 
+            width: 5%; 
+            color: #FFD700; /* Gold for rank number */
+        }
+        .leaderboard-table .country-col { width: 25%; }
+        .leaderboard-table .artist-col { width: 30%; font-size: 0.9em; }
+        .leaderboard-table .score-col { 
+            text-align: center; 
+            font-weight: bold; 
+            font-size: 1.1em; 
+            width: 10%;
+            color: #FFD700; /* Gold for score number */
+        }
+        .leaderboard-table .breakdown-col { 
+            width: 20%; 
+            font-size: 0.8em; 
+            color: #E0E0E0; /* Lighter gray for breakdown text, for better contrast */
+        }
+        .leaderboard-table .details-col { text-align: center; width: 10%; }
+
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            overflow-y: auto; 
+        }
+        .modal-content {
+            background-color: #004080; 
+            padding: 2rem;
+            border-radius: 0.75rem;
+            border: 2px solid #FFD700; 
+            width: 90%;
+            max-width: 600px;
+            color: #FFFFFF; 
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+        .modal-content h3 {
+            color: #FFD700; 
+        }
+        .btn {
+            background-color: #FFD700; 
+            color: #003366; 
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s, color 0.2s;
+            border: 1px solid #FFD700;
+        }
+        .btn:hover {
+            background-color: #E6C200; 
+            border-color: #E6C200;
+        }
+        .btn-secondary {
+            background-color: #00509E; 
+            color: #FFD700; 
+            border: 1px solid #FFD700;
+        }
+        .btn-secondary:hover {
+            background-color: #0060BF;
+            color: #FFFFFF;
+        }
+        
+        .chart-container {
+            position: relative;
+            margin: auto;
+            height: 60vh; 
+            width: 100%; 
+            max-width: 800px;
+        }
+
+        #exportableResults {
+            display: none; 
+            width: 375px; 
+            padding: 20px;
+            background-color: #003366; 
+            color: #FFD700; 
+            font-family: 'Inter', sans-serif;
+            border: 2px solid #FFD700;
+            border-radius: 10px;
+        }
+        #exportableResults h2 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #FFD700;
+        }
+        #exportableResults ul {
+            list-style: none;
+            padding: 0;
+        }
+        #exportableResults li {
+            background-color: #004080; 
+            color: #FFFFFF; 
+            padding: 10px;
+            margin-bottom: 8px;
+            border-radius: 5px;
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+         #exportableResults li .country-info {
+            flex-grow: 1;
+        }
+        #exportableResults li .score {
+            font-weight: bold;
+            color: #FFD700; 
+            font-size: 16px;
+        }
+         #exportableResults .watermark {
+            font-size: 10px;
+            text-align: center;
+            margin-top: 15px;
+            color: #FFD700;
+            opacity: 0.7;
+        }
+
+
+        @media (max-width: 768px) {
+            .chart-container {
+                height: 50vh;
+            }
+            .tab-button {
+                padding: 0.5rem 1rem;
+                font-size: 0.875rem;
+            }
+            .card {
+                padding: 1rem;
+            }
+            .modal-content {
+                width: 95%;
+            }
+            .leaderboard-table th, .leaderboard-table td {
+                padding: 0.5rem; /* Reduced padding for mobile */
+            }
+            .leaderboard-table .artist-col, .leaderboard-table .breakdown-col {
+                font-size: 0.75em; /* Further reduced font size for dense columns on mobile */
+            }
+            .leaderboard-table .country-col {
+                font-size: 0.85em;
+            }
+            .leaderboard-table .score-col {
+                font-size: 1em;
+            }
+        }
+        @media (max-width: 480px) {
+            .leaderboard-table .country-col, 
+            .leaderboard-table .artist-col, 
+            .leaderboard-table .breakdown-col {
+                font-size: 0.7em; /* Even smaller for very small screens */
+            }
+             .leaderboard-table .rank-col, .leaderboard-table .score-col, .leaderboard-table .details-col button {
+                font-size: 0.8em;
+            }
+            .leaderboard-table th {
+                font-size: 0.75em;
+            }
+            .btn {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.9rem;
+            }
+            header h1 { font-size: 2rem; } /* Adjust header font size */
+            header p { font-size: 1rem; }
+        }
+    </style>
+</head>
+<body class="bg-eurovision-blue text-eurovision-gold min-h-screen p-4 md:p-8">
+
+    <header class="text-center mb-8">
+        <h1 class="text-4xl md:text-5xl font-bold">Eurovision 2025</h1>
+        <p class="text-xl md:text-2xl">Voting System</p>
+    </header>
+
+    <div class="max-w-5xl mx-auto">
+        <div class="mb-6 flex space-x-2 md:space-x-4 justify-center">
+            <button id="voteTabButton" class="tab-button active" onclick="showTab('vote')">Vote</button>
+            <button id="leaderboardTabButton" class="tab-button" onclick="showTab('leaderboard')">Leaderboard</button>
+            <button id="chartsTabButton" class="tab-button" onclick="showTab('charts')">Charts</button>
+        </div>
+
+        <div id="voteTab" class="tab-content">
+            <div id="votingForm" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                </div>
+            <div class="mt-8 text-center">
+                <button class="btn text-lg px-8 py-3" onclick="submitVotes()">Submit All Votes</button>
+                <button class="btn btn-secondary text-lg px-8 py-3 ml-4" onclick="resetAllVotes()">Reset All Votes</button>
+            </div>
+        </div>
+
+        <div id="leaderboardTab" class="tab-content hidden">
+            <h2 class="text-3xl font-semibold mb-6 text-center eurovision-gold">Leaderboard</h2>
+            <div class="leaderboard-table-container"> 
+                <table id="leaderboardTable" class="min-w-full leaderboard-table">
+                    <thead>
+                        <tr>
+                            <th class="rank-col">Rank</th>
+                            <th class="country-col">Country</th>
+                            <th class="artist-col">Artist - Song</th>
+                            <th class="score-col">Score</th>
+                            <th class="breakdown-col">Breakdown (S/A/P/O)</th>
+                            <th class="details-col">Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="chartsTab" class="tab-content hidden">
+            <h2 class="text-3xl font-semibold mb-6 text-center eurovision-gold">Results Visualisation</h2>
+            <div class="bg-eurovision-blue p-4 md:p-6 rounded-lg border border-eurovision-gold shadow-lg mb-6">
+                <div class="chart-container mx-auto">
+                    <canvas id="totalScoresChart"></canvas>
+                </div>
+            </div>
+             <div class="mt-6 text-center space-x-4">
+                <button class="btn" onclick="exportResultsSummary()">Export Text Summary</button>
+                <button class="btn" onclick="exportResultsAsImage()">Export as Image</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="scoreBreakdownModal" class="modal hidden">
+        <div class="modal-content">
+            <h3 id="modalCountryName" class="text-2xl font-semibold mb-4"></h3>
+            <div id="modalScoreDetails" class="mb-4 text-lg">
+                </div>
+            <div class="chart-container" style="height: 300px; width: 100%;">
+                 <canvas id="categoryBreakdownChart"></canvas>
+            </div>
+            <button class="btn mt-6 float-right" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
+    <div id="exportableResultsContainer" class="fixed top-0 left-0 -z-50 opacity-0">
+        <div id="exportableResults">
+            <h2>Eurovision 2025 Results</h2>
+            <ul id="exportableResultsList">
+                </ul>
+            <p class="watermark">Generated by Eurovision Voting App</p>
+        </div>
+    </div>
+
+
+    <script>
+        // Eurovision 2025 Entries (based on the provided PDF)
+        const entries = [
+            { id: 1, country: "Noruega", artist: "KYLE ALESSANDRO", song: "Lighter", flag: "🇳🇴" },
+            { id: 2, country: "Luxemburgo", artist: "LAURA THORN", song: "La Poupée Mante Le Son", flag: "🇱🇺" },
+            { id: 3, country: "Estonia", artist: "TOMMY CASH", song: "Espresso Macchiato", flag: "🇪🇪" },
+            { id: 4, country: "Israel", artist: "YUVAL RAPHAEL", song: "New day will Rise", flag: "🇮🇱" },
+            { id: 5, country: "Lituania", artist: "KATARSIS", song: "Tavo Akys", flag: "🇱🇹" },
+            { id: 6, country: "España", artist: "MELODY", song: "Esa Diva", flag: "🇪🇸" },
+            { id: 7, country: "Ucrania", artist: "ZIFERBLAT", song: "Bird of Pray", flag: "🇺🇦" },
+            { id: 8, country: "Reino Unido", artist: "REMEMBER MONDAY", song: "What the Hell pust Happened?", flag: "🇬🇧" },
+            { id: 9, country: "Austria", artist: "لا (Artist Name)", song: "Wasted Love", flag: "🇦🇹" }, // Assuming "لا" is part of the artist name or a placeholder
+            { id: 10, country: "Islandia", artist: "VAEB", song: "Ron", flag: "🇮🇸" },
+            { id: 11, country: "Letonia", artist: "TAUTUMEITAS", song: "Bur Man Laimi", flag: "🇱🇻" },
+            { id: 12, country: "Países Bajos", artist: "CLAUDE", song: "C'est Lo Vie", flag: "🇳🇱" },
+            { id: 13, country: "Finlandia", artist: "ERIKA VIKMAN", song: "Ích Komme", flag: "🇫🇮" },
+            { id: 14, country: "Italia", artist: "LUCIO CORSI", song: "Volevo Essere un Duro", flag: "🇮🇹" },
+            { id: 15, country: "Polonia", artist: "JUSTYNA", song: "Gaja", flag: "🇵🇱" },
+            { id: 16, country: "Alemania", artist: "ABOR & TΥΝΝΑ", song: "Baller", flag: "🇩🇪" },
+            { id: 17, country: "Grecia", artist: "KLAVDIA", song: "Asteramóta", flag: "🇬🇷" },
+            { id: 18, country: "Armenia", artist: "PARG", song: "Survivor", flag: "🇦🇲" },
+            { id: 19, country: "Suiza", artist: "ZOË MË", song: "Voyage", flag: "🇨🇭" },
+            { id: 20, country: "Malta", artist: "MIRIANA CONTE", song: "Serving", flag: "🇲🇹" },
+            { id: 21, country: "Portugal", artist: "NAPA", song: "Deslocado", flag: "🇵🇹" },
+            { id: 22, country: "Dinamarca", artist: "SISSAL", song: "Hallucination", flag: "🇩🇰" },
+            { id: 23, country: "Suecia", artist: "KAJ", song: "Bara Bado Bostu", flag: "🇸🇪" },
+            { id: 24, country: "Francia", artist: "LOUANE", song: "Maman", flag: "🇫🇷" },
+            { id: 25, country: "San Marino", artist: "GABRY PONTE", song: "Tutto l'italia", flag: "🇸🇲" },
+            { id: 26, country: "Albania", artist: "SHKODRA ELEKTRONIKE", song: "Zierm", flag: "🇦🇱" }
+        ];
+
+        const categories = [
+            { id: 'song', name: 'Song', short: 'S', maxPoints: 3 },
+            { id: 'artist', name: 'Artist', short: 'A', maxPoints: 3 },
+            { id: 'performance', name: 'Performance', short: 'P', maxPoints: 3 },
+            { id: 'overall', name: 'Overall', short: 'O', maxPoints: 3 }
+        ];
+
+        let votes = {}; 
+        let totalScoresChartInstance = null;
+        let categoryBreakdownChartInstance = null;
+
+        // Initialize the voting form
+        function initVotingForm() {
+            const votingForm = document.getElementById('votingForm');
+            votingForm.innerHTML = ''; 
+            entries.forEach(entry => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                const currentEntryVotes = votes[entry.id] || {};
+                card.innerHTML = `
+                    <h3 class="text-xl font-semibold mb-1">${entry.flag} ${entry.country}</h3>
+                    <p class="text-sm mb-3">${entry.artist} - "${entry.song}"</p>
+                    ${categories.map(cat => `
+                        <div class="mb-3">
+                            <label for="cat-${entry.id}-${cat.id}" class="block text-sm font-medium mb-1">${cat.name} (0-${cat.maxPoints} pts): 
+                                <span id="val-${entry.id}-${cat.id}" class="score-output">${currentEntryVotes[cat.id] || 0}</span>
+                            </label>
+                            <input type="range" id="cat-${entry.id}-${cat.id}" name="cat-${entry.id}-${cat.id}" 
+                                   min="0" max="${cat.maxPoints}" value="${currentEntryVotes[cat.id] || 0}" step="1"
+                                   oninput="updateScoreDisplay(${entry.id}, '${cat.id}', this.value)">
+                        </div>
+                    `).join('')}
+                    <div class="mt-3 text-right">
+                        <strong class="text-lg">Total: <span id="total-${entry.id}" class="total-entry-score">0</span> / 12 pts</strong>
+                    </div>
+                `;
+                votingForm.appendChild(card);
+                updateEntryTotal(entry.id); 
+            });
+        }
+
+        // Update score display and store vote
+        function updateScoreDisplay(countryId, categoryId, value) {
+            document.getElementById(`val-${countryId}-${categoryId}`).textContent = value;
+            if (!votes[countryId]) {
+                votes[countryId] = {};
+            }
+            votes[countryId][categoryId] = parseInt(value);
+            updateEntryTotal(countryId);
+        }
+        
+        // Update total score for a single entry
+        function updateEntryTotal(countryId) {
+            let total = 0;
+            if (votes[countryId]) {
+                categories.forEach(cat => {
+                    total += votes[countryId][cat.id] || 0;
+                });
+            }
+            const totalElement = document.getElementById(`total-${countryId}`);
+            if (totalElement) { 
+                totalElement.textContent = total;
+            }
+        }
+
+        // Save votes to localStorage
+        function saveVotes() {
+            localStorage.setItem('eurovisionVotes2025', JSON.stringify(votes));
+        }
+
+        // Load votes from localStorage
+        function loadVotesAndInitializeForm() {
+            const savedVotes = localStorage.getItem('eurovisionVotes2025');
+            if (savedVotes) {
+                votes = JSON.parse(savedVotes);
+            } else {
+                votes = {}; 
+            }
+            initVotingForm(); 
+        }
+        
+        // Submit all votes
+        function submitVotes() {
+            saveVotes(); 
+            const messageBox = document.createElement('div');
+            messageBox.style = "position:fixed; top:20px; left:50%; transform:translateX(-50%); background-color:#FFD700; color:#003366; padding:15px 25px; border-radius:8px; box-shadow:0 4px 10px rgba(0,0,0,0.3); z-index:2000; font-weight:bold;";
+            messageBox.textContent = 'Votes Submitted! Results updated.';
+            document.body.appendChild(messageBox);
+            setTimeout(() => { messageBox.remove(); }, 3000);
+
+            updateLeaderboard();
+            updateCharts();
+            showTab('leaderboard'); 
+        }
+
+        // Reset all votes
+        function resetAllVotes() {
+            if (confirm("Are you sure you want to reset all votes? This cannot be undone.")) {
+                votes = {}; 
+                localStorage.removeItem('eurovisionVotes2025');
+                initVotingForm(); 
+                updateLeaderboard(); 
+                updateCharts(); 
+                // Simple message box instead of alert
+                const messageBox = document.createElement('div');
+                messageBox.style = "position:fixed; top:20px; left:50%; transform:translateX(-50%); background-color:#FFD700; color:#003366; padding:15px 25px; border-radius:8px; box-shadow:0 4px 10px rgba(0,0,0,0.3); z-index:2000; font-weight:bold;";
+                messageBox.textContent = 'All votes have been reset.';
+                document.body.appendChild(messageBox);
+                setTimeout(() => { messageBox.remove(); }, 3000);
+            }
+        }
+
+        // Calculate total scores for all entries
+        function calculateTotalScores() {
+            return entries.map(entry => {
+                let totalScore = 0;
+                let breakdown = {};
+                categories.forEach(cat => { // Ensure breakdown object is initialized for all categories
+                    breakdown[cat.id] = 0;
+                });
+
+                if (votes[entry.id]) {
+                    categories.forEach(cat => {
+                        const score = votes[entry.id][cat.id] || 0;
+                        totalScore += score;
+                        breakdown[cat.id] = score;
+                    });
+                }
+                return { ...entry, totalScore, breakdown };
+            }).sort((a, b) => b.totalScore - a.totalScore); 
+        }
+
+        // Update the leaderboard display
+        function updateLeaderboard() {
+            const leaderboardBody = document.getElementById('leaderboardTable').getElementsByTagName('tbody')[0];
+            leaderboardBody.innerHTML = ''; 
+            const rankedScores = calculateTotalScores();
+
+            if (rankedScores.length === 0 || rankedScores.every(e => e.totalScore === 0 && Object.values(e.breakdown).every(s => s === 0) )) {
+                const row = leaderboardBody.insertRow();
+                const cell = row.insertCell();
+                cell.colSpan = 6; 
+                cell.textContent = "No votes submitted yet, or all votes are zero.";
+                cell.className = "text-center py-4 eurovision-gold opacity-75";
+                return;
+            }
+
+            rankedScores.forEach((entry, index) => {
+                const row = leaderboardBody.insertRow();
+                const breakdownText = categories.map(cat => `${cat.short}:${entry.breakdown[cat.id] || 0}`).join(' ');
+
+                row.innerHTML = `
+                    <td class="rank-col">${index + 1}</td>
+                    <td class="country-col">${entry.flag} ${entry.country}</td>
+                    <td class="artist-col">${entry.artist} - "${entry.song}"</td>
+                    <td class="score-col">${entry.totalScore}</td>
+                    <td class="breakdown-col">${breakdownText}</td>
+                    <td class="details-col">
+                        <button class="btn btn-secondary text-sm py-1 px-2" onclick="showScoreBreakdown(${entry.id})">
+                            Details
+                        </button>
+                    </td>
+                `;
+            });
+        }
+
+        // Update charts (Now a Stacked Bar Chart)
+        function updateCharts() {
+            const rankedScores = calculateTotalScores();
+            // Filter out entries with zero total score unless no votes have been cast at all
+            const chartableScores = (Object.keys(votes).length === 0) ? 
+                                    rankedScores : 
+                                    rankedScores.filter(e => e.totalScore > 0);
+            
+            const labels = chartableScores.map(e => `${e.flag} ${e.country}`);
+
+            const categoryChartColors = {
+                song: 'rgba(255, 215, 0, 0.85)',      // Gold
+                artist: 'rgba(173, 216, 230, 0.85)',  // Light Blue / Silverish
+                performance: 'rgba(230, 230, 230, 0.85)',// Light Grey / Off-white
+                overall: 'rgba(100, 149, 237, 0.85)'    // Cornflower Blue
+            };
+            const categoryChartBorderColor = '#002952'; // Darker blue for distinct borders
+
+            const datasets = categories.map(cat => {
+                return {
+                    label: cat.name,
+                    data: chartableScores.map(entry => entry.breakdown[cat.id] || 0),
+                    backgroundColor: categoryChartColors[cat.id],
+                    borderColor: categoryChartBorderColor,
+                    borderWidth: 1
+                };
+            });
+
+            const ctx = document.getElementById('totalScoresChart').getContext('2d');
+            if (totalScoresChartInstance) {
+                totalScoresChartInstance.destroy();
+            }
+            totalScoresChartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: datasets
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y', 
+                    scales: {
+                        x: {
+                            stacked: true, // Enable stacking for x-axis (values)
+                            beginAtZero: true,
+                            ticks: { color: '#FFD700', font: { weight: '600' } }, 
+                            grid: { color: 'rgba(255, 215, 0, 0.2)'} 
+                        },
+                        y: {
+                            stacked: true, // Enable stacking for y-axis (labels)
+                            ticks: { color: '#FFFFFF', font: {size: 11, weight: '500'} }, 
+                            grid: { display: false }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: true, // Legend is important for stacked charts
+                            position: 'top',
+                            labels: { color: '#FFD700', font: {size: 14, weight: '600'} } 
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(0, 30, 60, 0.9)',
+                            titleColor: '#FFD700',
+                            bodyColor: '#FFFFFF',
+                            borderColor: '#FFD700',
+                            borderWidth: 1,
+                            padding: 10,
+                            callbacks: {
+                                label: function(context) {
+                                    // context.dataset.label is the category name
+                                    // context.parsed.x is the value for that category in a horizontal bar
+                                    return `${context.dataset.label || ''}: ${context.parsed.x} pts`;
+                                },
+                                footer: function(tooltipItems) {
+                                    // Add a footer to the tooltip to show the total for the bar
+                                    let sum = 0;
+                                    // The tooltipItems for a stacked bar will represent all segments at that index.
+                                    // We need to sum based on the dataIndex of the first item.
+                                    if (tooltipItems.length > 0) {
+                                        const dataIndex = tooltipItems[0].dataIndex;
+                                        totalScoresChartInstance.data.datasets.forEach(dataset => {
+                                            sum += dataset.data[dataIndex] || 0;
+                                        });
+                                    }
+                                    return 'Total: ' + sum + ' pts';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Show score breakdown modal
+        function showScoreBreakdown(countryId) {
+            const entry = entries.find(e => e.id === countryId);
+            const entryVotesData = votes[countryId] || {}; 
+            document.getElementById('modalCountryName').textContent = `${entry.flag} ${entry.country} - Score Breakdown`;
+            
+            const detailsDiv = document.getElementById('modalScoreDetails');
+            detailsDiv.innerHTML = categories.map(cat => `
+                <p class="py-1">${cat.name}: <strong class="eurovision-gold text-xl">${entryVotesData[cat.id] || 0} / ${cat.maxPoints} pts</strong></p>
+            `).join('');
+
+            const modal = document.getElementById('scoreBreakdownModal');
+            modal.classList.remove('hidden');
+
+            const catLabels = categories.map(c => c.name);
+            const catData = categories.map(c => entryVotesData[c.id] || 0);
+            const doughnutColors = ['#FF6F00', '#FF8F00', '#FFB300', '#FFD700'].reverse(); // Keep original reversed for visual consistency if preferred
+
+            const catCtx = document.getElementById('categoryBreakdownChart').getContext('2d');
+            if (categoryBreakdownChartInstance) {
+                categoryBreakdownChartInstance.destroy();
+            }
+            categoryBreakdownChartInstance = new Chart(catCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: catLabels,
+                    datasets: [{
+                        label: 'Points by Category',
+                        data: catData,
+                        backgroundColor: doughnutColors,
+                        borderColor: '#004080', 
+                        borderWidth: 3,
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: { color: '#FFD700', font: {size: 12, weight: '600'} }
+                        },
+                        title: {
+                            display: true,
+                            text: `Category Scores for ${entry.country}`,
+                            color: '#FFD700',
+                            font: {size: 16, weight: 'bold'}
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    label += context.parsed + ' pts';
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Close modal
+        function closeModal() {
+            document.getElementById('scoreBreakdownModal').classList.add('hidden');
+            if (categoryBreakdownChartInstance) {
+                categoryBreakdownChartInstance.destroy();
+                categoryBreakdownChartInstance = null;
+            }
+        }
+
+        // Tab switching logic
+        function showTab(tabName) {
+            ['vote', 'leaderboard', 'charts'].forEach(tabId => {
+                document.getElementById(tabId + 'Tab').classList.add('hidden');
+                document.getElementById(tabId + 'TabButton').classList.remove('active');
+            });
+            document.getElementById(tabName + 'Tab').classList.remove('hidden');
+            document.getElementById(tabName + 'TabButton').classList.add('active');
+
+            if (tabName === 'leaderboard') updateLeaderboard();
+            if (tabName === 'charts') updateCharts();
+        }
+        
+        // Export results as a text summary
+        function exportResultsSummary() {
+            const rankedScores = calculateTotalScores();
+            let summary = "Eurovision 2025 Voting Results:\n\n";
+            rankedScores.forEach((entry, index) => {
+                summary += `${index + 1}. ${entry.flag} ${entry.country} (${entry.artist} - "${entry.song}"): ${entry.totalScore} points\n`;
+                if (entry.breakdown) { 
+                    categories.forEach(cat => {
+                        summary += `  - ${cat.name}: ${entry.breakdown[cat.id] || 0} pts\n`;
+                    });
+                }
+                summary += "\n";
+            });
+
+            const textarea = document.createElement('textarea');
+            textarea.value = summary;
+            textarea.style.position = 'fixed'; 
+            textarea.style.left = '-9999px';
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                document.execCommand('copy');
+                alert('Results summary copied to clipboard!');
+            } catch (err) {
+                alert('Failed to copy results. Please copy manually from the prompt.');
+                prompt("Copy this text:", summary);
+            }
+            document.body.removeChild(textarea);
+        }
+
+        // Export results as an image using html2canvas
+        async function exportResultsAsImage() {
+            const rankedScores = calculateTotalScores();
+            const exportList = document.getElementById('exportableResultsList');
+            exportList.innerHTML = ''; 
+
+            const topN = Math.min(rankedScores.length, 10); // Show top 10 or fewer
+            for (let i = 0; i < topN; i++) {
+                const entry = rankedScores[i];
+                // Only include entries with scores, or always include top few even if score is 0
+                if (entry.totalScore === 0 && i > 5 && Object.keys(votes).length > 0) continue; 
+                const listItem = document.createElement('li');
+                listItem.innerHTML = `
+                    <span class="country-info">${i+1}. ${entry.flag} ${entry.country}</span>
+                    <span class="score">${entry.totalScore} pts</span>
+                `;
+                exportList.appendChild(listItem);
+            }
+            if (exportList.children.length === 0) { // Handle case where no scores are displayable
+                 exportList.innerHTML = '<li>No scores to display.</li>';
+            }
+
+            const exportableDiv = document.getElementById('exportableResults');
+            exportableDiv.style.display = 'block'; 
+
+            try {
+                const canvas = await html2canvas(exportableDiv, { 
+                    backgroundColor: '#003366', 
+                    scale: 2 
+                });
+                const imageURL = canvas.toDataURL('image/png');
+                const downloadLink = document.createElement('a');
+                downloadLink.href = imageURL;
+                downloadLink.download = 'eurovision2025_results.png';
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+                document.body.removeChild(downloadLink);
+            } catch (error) {
+                console.error("Error generating image:", error);
+                alert("Sorry, an error occurred while generating the image.");
+            } finally {
+                 exportableDiv.style.display = 'none'; 
+            }
+        }
+
+        // Initial setup on page load
+        window.onload = function() {
+            loadVotesAndInitializeForm(); 
+            // Always update leaderboard and charts on load to show initial state (empty or loaded)
+            updateLeaderboard();
+            updateCharts();
+            // Default to vote tab unless votes exist, then maybe leaderboard?
+            // For now, always default to 'vote' tab as per original logic.
+            showTab('vote'); 
+        };
+    </script>
+</body>
+</html>
