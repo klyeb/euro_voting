@@ -12,17 +12,17 @@
         /* Base Styles */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #1A202C; /* Dark blue-gray */
-            color: #E2E8F0; /* Light gray-blue text */
+            background-color: #1A202C;
+            color: #E2E8F0;
             overscroll-behavior-y: contain;
             line-height: 1.6;
         }
 
         /* Theme Colors */
-        .theme-primary { color: #FBBF24; } /* Amber */
-        .theme-secondary { color: #60A5FA; } /* Blue */
-        .bg-theme-surface { background-color: #2D3748; } /* Darker surface */
-        .border-theme-highlight { border-color: #FBBF24; } /* Amber border */
+        .theme-primary { color: #FBBF24; }
+        .theme-secondary { color: #60A5FA; }
+        .bg-theme-surface { background-color: #2D3748; }
+        .border-theme-highlight { border-color: #FBBF24; }
 
         /* Header Enhancements */
         header {
@@ -85,9 +85,38 @@
 
         /* Custom Range Slider Styling (Main form) */
         .slider-container { position: relative; margin-top: 0.5rem; margin-bottom: 1.5rem; }
-        input[type="range"] { -webkit-appearance: none; appearance: none; width: 100%; height: 12px; background: #4A5568; outline: none; border-radius: 6px; cursor: pointer; margin: 0; transition: background 0.3s; }
-        input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 24px; height: 24px; background: #FBBF24; cursor: grab; border-radius: 50%; border: 4px solid #2D3748; box-shadow: 0 0 8px rgba(251, 191, 36, 0.6); margin-top: -6px; transition: transform 0.2s; }
-        input[type="range"]::-moz-range-thumb { width: 24px; height: 24px; background: #FBBF24; cursor: grab; border-radius: 50%; border: 4px solid #2D3748; box-shadow: 0 0 8px rgba(251, 191, 36, 0.6); }
+        input[type="range"] { 
+            -webkit-appearance: none; appearance: none; 
+            width: 100%; 
+            height: 16px; /* Increased track height for better hitbox */
+            background: #4A5568; /* Default track, fill is applied via JS */
+            outline: none; 
+            border-radius: 8px; /* Rounded track */
+            cursor: pointer; 
+            margin: 0; 
+            transition: background 0.3s; 
+        }
+        input[type="range"]::-webkit-slider-thumb { 
+            -webkit-appearance: none; appearance: none; 
+            width: 24px; /* Thumb size */
+            height: 24px; /* Thumb size */
+            background: #FBBF24; 
+            cursor: grab; 
+            border-radius: 50%; 
+            border: 4px solid #2D3748; 
+            box-shadow: 0 0 8px rgba(251, 191, 36, 0.6); 
+            margin-top: -4px; /* Adjust thumb position relative to new track height */
+            transition: transform 0.2s; 
+        }
+        input[type="range"]::-moz-range-thumb { 
+            width: 24px; 
+            height: 24px; 
+            background: #FBBF24; 
+            cursor: grab; 
+            border-radius: 50%; 
+            border: 4px solid #2D3748; 
+            box-shadow: 0 0 8px rgba(251, 191, 36, 0.6); 
+        }
         input[type="range"]:active::-webkit-slider-thumb { cursor: grabbing; transform: scale(1.1); }
         input[type="range"]:active::-moz-range-thumb { cursor: grabbing; transform: scale(1.1); }
         .slider-ticks { display: flex; justify-content: space-between; padding: 0 5px; margin-top: 0.6rem; }
@@ -99,7 +128,7 @@
         .modal-body .modal-score-item-editor { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; }
         .modal-body .modal-score-item-editor label { font-size: 0.9rem; color: #CBD5E0; flex-basis: 60%;}
         .modal-body .modal-score-item-editor input[type="number"] {
-            width: 60px; /* Fixed width for number input */
+            width: 60px; 
             padding: 0.3rem 0.5rem;
             background-color: #1F2937;
             border: 1px solid #4A5568;
@@ -107,7 +136,7 @@
             border-radius: 0.375rem;
             text-align: center;
             font-size: 0.9rem;
-            -moz-appearance: textfield; /* Firefox */
+            -moz-appearance: textfield; 
         }
         .modal-body .modal-score-item-editor input[type="number"]::-webkit-outer-spin-button,
         .modal-body .modal-score-item-editor input[type="number"]::-webkit-inner-spin-button {
@@ -197,11 +226,10 @@
             flex-grow: 1;
         }
         
-        /* Chart Container in Modal (now at the top of modal-body) */
         .modal-body .chart-container {
              height: 180px; width: 180px; 
              padding: 0.2rem;
-             background-color: transparent; box-shadow: none; margin: 0 auto 1.5rem auto; /* Centered, with margin below */
+             background-color: transparent; box-shadow: none; margin: 0 auto 1.5rem auto; 
         }
 
 
@@ -231,7 +259,7 @@
         .btn-danger { background-color: #E53E3E; color: #FFFFFF; }
         .btn-danger:hover { background-color: #C53030; box-shadow: 0 4px 8px rgba(229, 62, 62, 0.3); }
         .btn-subtle { background-color: #3E4C5F; color: #A0AEC0; font-size: 0.85rem; padding: 0.5rem 1rem;}
-        .btn-subtle.active { background-color: #FBBF24; color: #1A202C; font-weight: 600;} /* Active state for chart buttons */
+        .btn-subtle.active { background-color: #FBBF24; color: #1A202C; font-weight: 600;} 
         .btn-subtle:not(.active):hover { background-color: #4A5568; color: #E2E8F0; }
         .btn.disabled, .btn:disabled { background-color: #718096; color: #A0AEC0; cursor: not-allowed; transform: none; box-shadow: none; opacity: 0.7; }
 
@@ -257,7 +285,7 @@
         
 
         /* Responsive Adjustments */
-        @media (min-width: 640px) { /* sm breakpoint */
+        @media (min-width: 640px) { 
             header h1 { font-size: 2.5rem; }
             header .subtitle { font-size: 1.1rem; }
             header .app-subtitle { font-size: 1.3rem; }
@@ -269,18 +297,18 @@
             .leaderboard-table td { font-size: 0.95rem; }
             .btn { padding: 0.8rem 1.6rem; font-size: 1rem; } 
             .modal-footer .btn { padding: 0.6rem 1.2rem; font-size: 0.9rem; } 
-            .chart-container { height: 350px; } /* Main chart container */
-            .modal-body .chart-container { height: 200px; width: 200px; } /* Modal chart container */
+            .chart-container { height: 350px; } 
+            .modal-body .chart-container { height: 200px; width: 200px; } 
             .modal-content { padding: 0; }
             .modal-header { padding: 1.5rem 2rem; }
             .modal-body { padding: 1.5rem 2rem; } 
         }
-        @media (min-width: 768px) { /* md breakpoint */
-            .chart-container { height: 400px; } /* Main chart container */
+        @media (min-width: 768px) { 
+            .chart-container { height: 400px; } 
             .modal-country-name { font-size: 2rem; }
             .modal-song-title { font-size: 1.2rem; }
             .modal-artist-name { font-size: 1rem; }
-            .modal-body .chart-container { height: 220px; width: 220px; } /* Modal chart container */
+            .modal-body .chart-container { height: 220px; width: 220px; } 
         }
         
         .leaderboard-table-container::-webkit-scrollbar { display: none; }
@@ -342,11 +370,12 @@
             <h2 class="text-2xl sm:text-3xl font-semibold mb-2 text-center theme-primary">Results Visualisation</h2>
             <div class="chart-options mb-6">
                 <span class="text-sm text-gray-400">Display:</span>
-                <button id="chartDisplayAllButton" class="btn btn-subtle active" onclick="setChartDisplayMode('all')">All Scores</button>
-                <button id="chartDisplayTop10Button" class="btn btn-subtle" onclick="setChartDisplayMode('top10')">Top 10</button>
+                <button id="chartDisplayAllButton" class="btn btn-subtle" onclick="setChartDisplayMode('all')">All Scores</button>
+                <button id="chartDisplayTop10Button" class="btn btn-subtle active" onclick="setChartDisplayMode('top10')">Top 10</button>
             </div>
             <div class="bg-theme-surface p-3 sm:p-4 rounded-lg border border-theme-highlight shadow-lg mb-6">
-                <div class="chart-container mx-auto"> <canvas id="totalScoresChart"></canvas>
+                <div class="chart-container mx-auto"> 
+                    <canvas id="totalScoresChart"></canvas>
                 </div>
             </div>
              <div class="mt-6 text-center space-y-3 sm:space-y-0 sm:flex sm:flex-wrap sm:justify-center sm:gap-4">
@@ -373,7 +402,8 @@
             </div>
             <div class="modal-body">
                 <div id="modalScore_countryId_temp" data-countryid=""></div> 
-                <div class="chart-container mx-auto"> <canvas id="categoryBreakdownChart"></canvas>
+                <div class="chart-container mx-auto"> 
+                    <canvas id="categoryBreakdownChart"></canvas>
                 </div>
                 <div id="modalScoreEditor" class="modal-score-editor">
                     </div>
@@ -384,7 +414,6 @@
             </div>
         </div>
     </div>
-
 
     <div id="exportableResultsContainer">
         <div id="exportableResults">
@@ -426,19 +455,28 @@
             { id: 26, country: "Albania", artist: "SHKODRA ELEKTRONIKE", song: "Zierm", flag: "🇦🇱" }
         ];
 
-        const categories = [
-            // Order here defines the tie-breaking preference if total scores are equal
+        // Categories for display and input order
+        const displayCategories = [
+            { id: 'song', name: 'Song', short: 'S', maxPoints: 3 },
+            { id: 'artist', name: 'Artist', short: 'A', maxPoints: 3 },
+            { id: 'performance', name: 'Performance', short: 'P', maxPoints: 3 },
+            { id: 'overall', name: 'Overall', short: 'O', maxPoints: 3 }
+        ];
+
+        // Categories for tie-breaking logic (Overall first) and potentially for chart stacking order
+        const tieBreakAndChartCategories = [
             { id: 'overall', name: 'Overall', short: 'O', maxPoints: 3 },
             { id: 'song', name: 'Song', short: 'S', maxPoints: 3 },
             { id: 'performance', name: 'Performance', short: 'P', maxPoints: 3 },
             { id: 'artist', name: 'Artist', short: 'A', maxPoints: 3 }
         ];
 
+
         let votes = {}; 
         let totalScoresChartInstance = null;
         let categoryBreakdownChartInstance = null;
         let votesChangedSinceLastSave = false;
-        let currentChartDisplayMode = 'all';
+        let currentChartDisplayMode = 'top10'; // Default to Top 10
         let modalVotesChanged = false; 
         let tempModalScores = {}; 
 
@@ -474,7 +512,7 @@
         }
 
         function updateSliderVisual(slider) {
-            if (!slider) return;
+            if (!slider || slider.type !== 'range') return;
             const min = parseFloat(slider.min);
             const max = parseFloat(slider.max);
             const value = parseFloat(slider.value);
@@ -483,26 +521,23 @@
             slider.style.background = `linear-gradient(to right, #FBBF24 ${fillPercentage}%, #4A5568 ${fillPercentage}%)`;
         }
         
-        // Creates HTML for a category input (slider for main form, number input for modal)
         function createCategoryInputHTML(entryId, category, currentValue, isModal = false) {
             const inputId = `cat-input-${category.id}-${isModal ? 'modal-' : ''}${entryId}`;
-            const valueDisplayId = `val-display-${category.id}-${isModal ? 'modal-' : ''}${entryId}`;
+            const valueDisplayId = `val-display-${category.id}-${isModal ? 'modal-' : ''}${entryId}`; // Only used for sliders
 
             if (isModal) {
-                // Number input for modal
                 return `
                     <div class="modal-score-item-editor">
                         <label for="${inputId}" class="block text-sm font-medium">${category.name} (0-${category.maxPoints} pts)</label>
                         <input type="number" id="${inputId}" name="${inputId}" 
                                min="0" max="${category.maxPoints}" value="${currentValue}"
-                               oninput="updateScoreDisplayInModal(${entryId}, '${category.id}', this.value, this)"
-                               onchange="updateScoreDisplayInModal(${entryId}, '${category.id}', this.value, this)" /* Handle direct input change */
+                               oninput="updateScoreDisplayInModal(${entryId}, '${category.id}', this.value)"
+                               onchange="updateScoreDisplayInModal(${entryId}, '${category.id}', this.value)" 
                                class="w-16 p-1 text-center bg-gray-700 border border-gray-600 rounded">
                     </div>`;
-            } else {
-                // Slider for main voting form
+            } else { // Slider for main voting form
                 return `
-                    <div class="modal-score-item">
+                    <div class="modal-score-item"> 
                         <div class="flex justify-between items-center mb-1">
                             <label for="${inputId}" class="block text-sm font-medium">${category.name} (0-${category.maxPoints} pts)</label>
                             <span id="${valueDisplayId}" class="score-output">${currentValue}</span>
@@ -511,12 +546,33 @@
                             <input type="range" id="${inputId}" name="${inputId}" 
                                    min="0" max="${category.maxPoints}" value="${currentValue}" step="1"
                                    oninput="updateScoreDisplay(${entryId}, '${category.id}', this.value, this, '${valueDisplayId}')"
+                                   onclick="handleSliderTrackClick(event, ${entryId}, '${category.id}', this, '${valueDisplayId}')"
                                    aria-labelledby="label-${inputId}">
                             <div class="slider-ticks">
                                 ${Array.from({ length: category.maxPoints + 1 }, (_, i) => `<span>${i}</span>`).join('')}
                             </div>
                         </div>
                     </div>`;
+            }
+        }
+
+        function handleSliderTrackClick(event, countryId, categoryId, slider, valueDisplayId) {
+            // Only proceed if the click was not on the thumb itself (which is handled by 'input' event)
+            if (event.target !== slider) return; 
+
+            const rect = slider.getBoundingClientRect();
+            const offsetX = event.clientX - rect.left;
+            const percentage = offsetX / rect.width;
+            let value = parseFloat(slider.min) + percentage * (parseFloat(slider.max) - parseFloat(slider.min));
+            value = Math.round(value / parseFloat(slider.step)) * parseFloat(slider.step);
+            
+            // Clamp value within min/max
+            value = Math.max(parseFloat(slider.min), Math.min(value, parseFloat(slider.max)));
+
+            if (parseFloat(slider.value) !== value) {
+                slider.value = value;
+                // Manually trigger the input event to ensure all updates occur
+                updateScoreDisplay(countryId, categoryId, slider.value, slider, valueDisplayId);
             }
         }
 
@@ -529,8 +585,7 @@
                 card.className = 'card';
                 const currentEntryVotes = votes[entry.id] || {};
                 let categoryHTML = '';
-                // Iterate in the order defined in `categories` for consistent display
-                categories.forEach(cat => { 
+                displayCategories.forEach(cat => { // Use displayCategories for order
                     const currentValue = currentEntryVotes[cat.id] || 0;
                     categoryHTML += createCategoryInputHTML(entry.id, cat, currentValue, false);
                 });
@@ -540,10 +595,10 @@
                     <p class="text-xs text-gray-400 mb-4">${entry.artist} - "${entry.song}"</p>
                     ${categoryHTML}
                     <div class="mt-4 text-right">
-                        <strong class="text-md">Total: <span id="total-${entry.id}" class="total-entry-score">0</span> / ${categories.reduce((sum, cat) => sum + cat.maxPoints, 0)} pts</strong>
+                        <strong class="text-md">Total: <span id="total-${entry.id}" class="total-entry-score">0</span> / ${displayCategories.reduce((sum, cat) => sum + cat.maxPoints, 0)} pts</strong>
                     </div>`;
                 votingForm.appendChild(card);
-                categories.forEach(cat => {
+                displayCategories.forEach(cat => {
                     const slider = card.querySelector(`#cat-input-${cat.id}-${entry.id}`);
                     if (slider && slider.type === 'range') updateSliderVisual(slider);
                 });
@@ -564,29 +619,27 @@
 
         function updateScoreDisplayInModal(countryId, categoryId, value) {
             const numericValue = parseInt(value);
-            const maxPoints = categories.find(c => c.id === categoryId).maxPoints;
+            const categoryInfo = displayCategories.find(c => c.id === categoryId); // Use displayCategories
+            if (!categoryInfo) return;
+            const maxPoints = categoryInfo.maxPoints;
 
-            // Validate and clamp the value
             let clampedValue = isNaN(numericValue) ? 0 : Math.max(0, Math.min(numericValue, maxPoints));
             
             const inputElement = document.getElementById(`cat-input-${categoryId}-modal-${countryId}`);
             if (inputElement && parseInt(inputElement.value) !== clampedValue) {
-                 inputElement.value = clampedValue; // Update input if value was clamped
+                 inputElement.value = clampedValue; 
             }
 
             if (!tempModalScores[countryId]) tempModalScores[countryId] = {};
-            // Only update if the clamped value is different from the current temp score
             if (tempModalScores[countryId][categoryId] !== clampedValue) {
                 tempModalScores[countryId][categoryId] = clampedValue;
                 modalVotesChanged = true;
                 document.getElementById('updateVotesFromModalButton').disabled = false;
             }
 
-
-            // Update doughnut chart in modal live
             if (categoryBreakdownChartInstance) {
                 let totalForDoughnut = 0;
-                categoryBreakdownChartInstance.data.datasets[0].data = categories.map(cat => {
+                categoryBreakdownChartInstance.data.datasets[0].data = displayCategories.map(cat => { // Use displayCategories
                     const score = tempModalScores[countryId][cat.id] || 0;
                     totalForDoughnut += score;
                     return score;
@@ -600,7 +653,7 @@
             let total = 0;
             const currentVotesToCalc = specificVotes || votes[countryId]; 
             if (currentVotesToCalc) {
-                categories.forEach(cat => { total += currentVotesToCalc[cat.id] || 0; });
+                displayCategories.forEach(cat => { total += currentVotesToCalc[cat.id] || 0; }); // Use displayCategories for sum
             }
             const totalElement = document.getElementById(`total-${countryId}`); 
             if (totalElement) totalElement.textContent = total;
@@ -624,7 +677,7 @@
             saveVotes(); 
             showCustomMessage('Votes Submitted! Results updated.');
             updateLeaderboard();
-            updateCharts();
+            updateCharts(); // Will use currentChartDisplayMode, which defaults to top10
             showTab('leaderboard'); 
         }
 
@@ -634,7 +687,7 @@
                 localStorage.removeItem('eurovisionVotesPostugangApp');
                 initVotingForm(); 
                 updateLeaderboard(); 
-                updateCharts(); 
+                setChartDisplayMode('top10'); // Reset chart to top10 on reset
                 votesChangedSinceLastSave = false;
                 showCustomMessage('All votes have been reset.');
                 showTab('vote');
@@ -645,8 +698,7 @@
             let ranked = entries.map(entry => {
                 let totalScore = 0;
                 let breakdown = {};
-                // Ensure all categories are present in breakdown, even if score is 0
-                categories.forEach(cat => { 
+                displayCategories.forEach(cat => { // Use displayCategories for calculating total and initial breakdown
                     const score = (votes[entry.id] && votes[entry.id][cat.id] !== undefined) ? votes[entry.id][cat.id] : 0;
                     totalScore += score;
                     breakdown[cat.id] = score;
@@ -654,20 +706,18 @@
                 return { ...entry, totalScore, breakdown };
             });
 
-            // Sort with tie-breaking
             ranked.sort((a, b) => {
                 if (b.totalScore !== a.totalScore) {
                     return b.totalScore - a.totalScore;
                 }
-                // Tie-breaking by category scores in predefined order
-                for (const category of categories) { // `categories` array is already in tie-breaking preference order
-                    const scoreA = a.breakdown[category.id] || 0;
+                // Tie-breaking by category scores using tieBreakAndChartCategories order
+                for (const category of tieBreakAndChartCategories) { 
+                    const scoreA = a.breakdown[category.id] || 0; // Breakdown already has all keys from displayCategories
                     const scoreB = b.breakdown[category.id] || 0;
                     if (scoreB !== scoreA) {
                         return scoreB - scoreA;
                     }
                 }
-                // Final tie-breaker: alphabetical by country name
                 return a.country.localeCompare(b.country);
             });
             return ranked;
@@ -687,7 +737,8 @@
             }
             rankedScores.forEach((entry, index) => {
                 const row = leaderboardBody.insertRow();
-                const voteBreakdownString = categories.map(cat => (entry.breakdown[cat.id] || 0)).join('-');
+                // Details button text should reflect displayCategories order
+                const voteBreakdownString = displayCategories.map(cat => (entry.breakdown[cat.id] || 0)).join('-');
                 row.innerHTML = `
                     <td class="rank-col">${index + 1}</td>
                     <td class="country-col">${entry.flag} ${entry.country}</td>
@@ -703,7 +754,6 @@
         
         function setChartDisplayMode(mode) {
             currentChartDisplayMode = mode;
-            // Ensure correct highlighting for chart display buttons
             document.getElementById('chartDisplayAllButton').classList.toggle('active', mode === 'all');
             document.getElementById('chartDisplayTop10Button').classList.toggle('active', mode === 'top10');
             updateCharts();
@@ -711,20 +761,28 @@
 
         function updateCharts() {
             const allRankedScores = calculateTotalScores(); 
-            let chartableScores = allRankedScores;
+            let chartableScores = [];
 
             if (currentChartDisplayMode === 'top10') {
-                chartableScores = allRankedScores.slice(0, 10).filter(e => e.totalScore > 0 || Object.keys(votes).length === 0);
-                 if (chartableScores.length === 0 && allRankedScores.some(e => e.totalScore > 0)) {
-                    chartableScores = allRankedScores.filter(e => e.totalScore > 0).slice(0,10);
+                chartableScores = allRankedScores.slice(0, 10);
+                // If top 10 are all zero but other scores exist, show those instead, up to 10
+                if (chartableScores.every(e => e.totalScore === 0) && allRankedScores.some(e => e.totalScore > 0)) {
+                    chartableScores = allRankedScores.filter(e => e.totalScore > 0).slice(0, 10);
                 }
-            } // No 'else' needed as chartableScores defaults to allRankedScores if not 'top10'
+            } else { // 'all'
+                 chartableScores = allRankedScores;
+            }
+            // Filter out zero scores only if there are actual votes, to avoid empty chart on initial load
+            if (Object.keys(votes).length > 0) {
+                chartableScores = chartableScores.filter(e => e.totalScore > 0);
+            }
             
             const labels = chartableScores.map(e => `${e.flag} ${e.country.substring(0,12)}${e.country.length > 12 ? '...' : ''}`);
-            // Use the globally defined `categories` order for chart datasets
             const categoryChartColors = { song: 'rgba(251, 191, 36, 0.8)', artist: 'rgba(96, 165, 250, 0.8)', performance: 'rgba(248, 113, 113, 0.8)', overall: 'rgba(52, 211, 153, 0.8)' };
             const categoryChartBorderColor = '#1A202C';
-            const datasets = categories.map(cat => ({ 
+            // Datasets for stacked bar chart should use tieBreakAndChartCategories for consistent stacking order if desired,
+            // or displayCategories if stacking should match input order. Let's use displayCategories for visual consistency with input.
+            const datasets = displayCategories.map(cat => ({ 
                 label: cat.name, 
                 data: chartableScores.map(entry => entry.breakdown[cat.id] || 0), 
                 backgroundColor: categoryChartColors[cat.id], 
@@ -736,14 +794,14 @@
             const ctx = document.getElementById('totalScoresChart').getContext('2d');
             if (totalScoresChartInstance) totalScoresChartInstance.destroy();
             
-            if (labels.length === 0 && Object.keys(votes).length > 0) {
+            if (labels.length === 0) { // Handles case where no scores are > 0 or no votes yet
                  ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
                  ctx.save();
                  ctx.textAlign = 'center';
                  ctx.textBaseline = 'middle';
                  ctx.font = '16px Inter';
                  ctx.fillStyle = '#9CA3AF';
-                 ctx.fillText(currentChartDisplayMode === 'top10' ? 'No scores in the Top 10 yet.' : 'No scores to display yet.', ctx.canvas.width / 2, ctx.canvas.height / 2);
+                 ctx.fillText(Object.keys(votes).length === 0 ? 'No votes submitted yet.' : 'No scores above zero to display.', ctx.canvas.width / 2, ctx.canvas.height / 2);
                  ctx.restore();
                  return;
             }
@@ -772,7 +830,7 @@
             document.getElementById('updateVotesFromModalButton').disabled = true; 
 
             tempModalScores[countryId] = JSON.parse(JSON.stringify(votes[countryId] || {}));
-            categories.forEach(cat => { 
+            displayCategories.forEach(cat => { // Use displayCategories
                 if (tempModalScores[countryId][cat.id] === undefined) {
                     tempModalScores[countryId][cat.id] = 0;
                 }
@@ -783,32 +841,30 @@
             document.getElementById('modalSongTitle').textContent = `"${entry.song}"`;
             document.getElementById('modalArtistName').textContent = entry.artist;
             
-            // Populate number inputs for score editing in the modal
             const scoreEditorDiv = document.getElementById('modalScoreEditor');
             scoreEditorDiv.innerHTML = ''; 
             let categoryInputsHTML = '';
-            // Iterate in the order defined in `categories` for consistent display
-            categories.forEach(cat => { 
+            displayCategories.forEach(cat => { // Use displayCategories for order in modal
                 const currentValue = tempModalScores[countryId][cat.id] || 0;
                 categoryInputsHTML += createCategoryInputHTML(countryId, cat, currentValue, true);
             });
             scoreEditorDiv.innerHTML = categoryInputsHTML;
             
             let totalScoreForEntry = 0;
-            categories.forEach(cat => { totalScoreForEntry += (tempModalScores[countryId][cat.id] || 0); });
+            displayCategories.forEach(cat => { totalScoreForEntry += (tempModalScores[countryId][cat.id] || 0); });
 
             const modal = document.getElementById('scoreBreakdownModal');
             modal.classList.add('show');
             document.body.style.overflow = 'hidden';
 
-            setTimeout(() => { // Render chart after modal is shown
+            setTimeout(() => { 
                 const catCtx = document.getElementById('categoryBreakdownChart').getContext('2d');
                 if (!catCtx) { console.error("Category breakdown chart context not found!"); return; }
                 
-                const catLabels = categories.map(c => c.name);
-                const catData = categories.map(c => tempModalScores[countryId][c.id] || 0);
+                const catLabels = displayCategories.map(c => c.name); // Use displayCategories for chart labels
+                const catData = displayCategories.map(c => tempModalScores[countryId][c.id] || 0); // Use displayCategories for data
                 const categoryChartColorsModal = { song: 'rgba(251, 191, 36, 0.9)', artist: 'rgba(96, 165, 250, 0.9)', performance: 'rgba(248, 113, 113, 0.9)', overall: 'rgba(52, 211, 153, 0.9)' };
-                const doughnutColors = categories.map(cat => categoryChartColorsModal[cat.id]);
+                const doughnutColors = displayCategories.map(cat => categoryChartColorsModal[cat.id]);
 
                 if (categoryBreakdownChartInstance) categoryBreakdownChartInstance.destroy();
                 categoryBreakdownChartInstance = new Chart(catCtx, {
@@ -831,7 +887,7 @@
 
             if (!votes[countryId]) votes[countryId] = {};
             
-            categories.forEach(cat => {
+            displayCategories.forEach(cat => { // Use displayCategories
                 votes[countryId][cat.id] = tempModalScores[countryId][cat.id] || 0;
             });
 
@@ -884,8 +940,7 @@
             }
             if (tabName === 'leaderboard') updateLeaderboard();
             if (tabName === 'charts') { 
-                // Ensure chart display mode buttons are correctly set when tab becomes active
-                setChartDisplayMode(currentChartDisplayMode); 
+                setChartDisplayMode(currentChartDisplayMode); // Ensures correct button highlight and chart
             }
         }
         
@@ -893,7 +948,7 @@
             const rankedScores = calculateTotalScores();
             if (rankedScores.length === 0 || rankedScores.every(e => e.totalScore === 0)) { showCustomMessage("No scores to export yet!"); return; }
             let summary = "POSTUGANG's Eurovision App Results:\n\n";
-            rankedScores.forEach((entry, index) => { summary += `${index + 1}. ${entry.flag} ${entry.country} (${entry.artist} - "${entry.song}"): ${entry.totalScore} points\n`; if (entry.breakdown) { categories.forEach(cat => { summary += `  - ${cat.name}: ${entry.breakdown[cat.id] || 0} pts\n`; }); } summary += "\n"; });
+            rankedScores.forEach((entry, index) => { summary += `${index + 1}. ${entry.flag} ${entry.country} (${entry.artist} - "${entry.song}"): ${entry.totalScore} points\n`; if (entry.breakdown) { displayCategories.forEach(cat => { summary += `  - ${cat.name}: ${entry.breakdown[cat.id] || 0} pts\n`; }); } summary += "\n"; }); // Use displayCategories for summary
             if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(summary).then(() => showCustomMessage('Results summary copied!')).catch(err => fallbackCopyTextToClipboard(summary)); } else { fallbackCopyTextToClipboard(summary); }
         }
 
@@ -932,8 +987,8 @@
         window.onload = function() {
             loadVotesAndInitializeForm(); 
             updateLeaderboard();
-            setChartDisplayMode('all'); // Initialize with 'all' and highlight button
-            showTab('vote');
+            setChartDisplayMode('top10'); // Default to Top 10 and highlight button
+            showTab('vote'); // Start on vote tab
         };
     </script>
 </body>
